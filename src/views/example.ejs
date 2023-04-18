@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Retardo de carga de elemento en plantilla EJS</title>
+</head>
+<body>
+    <div>
+        <h1>Retardo de carga de elemento</h1>
+        <ul id="miLista">
+            <% for (let i = 1; i <= 4; i++) { %>
+                <li class="elemento">Elemento <%= i %></li>
+            <% } %>
+        </ul>
+    </div>
+
+    <script>
+            
+        // Esperar a que se carguen los elementos
+        let promise = new Promise((resolve, reject) => {
+            window.addEventListener('load', () => {
+                resolve();
+            });
+        });
+
+        promise.then(() => {
+            // Obtener los elementos en el array de className
+            let elementos = document.getElementsByClassName('elemento');
+
+            let eliminar_elementos = [...elementos];
+            let copia_elementos = [...elementos];
+             
+            let array = [];
+
+            // Guardar el texto que contenienen los elememtentos en un array
+            for(let a = 0; a < elementos.length; a++){
+                array.push( elementos[a].textContent )
+            }
+
+            // Obtener el contenedor donde se cargarán los elementos
+            let contenedor = document.getElementById('miLista');
+
+            // Bucle for para generar los elementos
+            for (let i = 0; i < copia_elementos.length; i++) {
+
+                // Utilizar setTimeout para retrasar la carga del elemento
+                setTimeout(() => {
+                    let x = document.createElement('li');
+                    x.classList.add('elemento');
+                    x.textContent = array[i];
+                    contenedor.appendChild(x);
+
+                }, (i + 1) * 1000); // Retrasar cada elemento por 1 segundo
+            }
+
+            // 4 -> (4-1) -> 3 -0 = [3]; (4-1) -> 3 -1 = [2]; (4-1) -> 3 -2 = [1]; (4-1) -> 3 -3 = [0]
+            for(let d = 0; d < eliminar_elementos.length; d++){
+                contenedor.removeChild(elementos[ ((eliminar_elementos.length -1) -d) ]);
+            }
+        });
+
+    </script>
+    
+</body>
+</html>
