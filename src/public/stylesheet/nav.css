@@ -1,0 +1,50 @@
+header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  background: rgb(154, 255, 253);
+  background: linear-gradient(90deg, rgb(154, 255, 253) 11%, rgb(123, 192, 228) 34%, rgb(63, 13, 218) 100%);
+  /*border-bottom: 1px solid black*/
+  box-shadow: 1px 1px 1px 1px black, 1px 1px 1px 2px #412781, 1px 1px 1px 3px #4311BF, 1px 1px 1px 3px #4D05FF;
+}
+header nav {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  padding: 3.5px;
+}
+header nav .logo {
+  background-color: #fff;
+  padding: 0.5px;
+  border-radius: 10px;
+}
+header nav .logo img {
+  width: 70px;
+}
+header nav ul {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  list-style-type: none;
+}
+header nav ul li {
+  padding: 0.25rem 0.5rem;
+  margin: 0 0.25rem;
+  background-color: #000;
+  border-radius: 10px;
+}
+header nav ul li a {
+  text-decoration: none;
+  color: #fff;
+  font-weight: bold;
+}
+header nav ul li a i {
+  font-size: 20px;
+}
+header nav .hamburger {
+  display: none;
+}/*# sourceMappingURL=nav.css.map */

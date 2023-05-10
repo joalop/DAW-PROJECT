@@ -1,0 +1,78 @@
+<%# HEAD TOP 1/2 %>
+<%- include('../components/head-top.ejs') %>
+
+<%# FONTS %>
+<%- include('../modules/link-fonts/link-fonts.ejs') %>
+
+<%# ICONS %>
+<%- include('../modules/link-icons/link-icons.ejs') %>
+
+<%# INICIAL STYLES %>
+<%- include('../modules/link-inicial/inicial-styles.ejs') %>
+
+<%# STYLES NAV %>
+<%- include('../modules/link-nav-style/nav-styles.ejs') %>
+
+<style>
+
+    main{
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+
+        margin-top: 6rem;
+    }
+
+    footer {
+
+        width: 100%;
+
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+    }
+
+    footer div{
+
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+    }
+
+    footer div ul{
+        list-style-type: none;
+
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+    }
+
+    footer div ul li{
+        margin: 0 0.25rem;
+        width: 5rem;
+        padding: 10px;
+        border: 0.01px solid black;
+        border-radius: 10px;
+    }
+</style>
+
+<%# HEAD BOTTOM "2/2 %>
+<%- include('../components/head-bottom.ejs') %>
+
+    <%# HEADER + NAV COMPONENT %>
+    <%- include('../components/nav/nav.ejs') %>
+
+    <main>
+        
+        <section class="main-body">
+            <h2>Inicio</h2>
+        </section>
+
+        <%# FOOTER COMPONENT %>
+        <%- include('../components/footer/footer.ejs') %>
+
+    </main>
+
+<%# FOOTER BOTTOM %>
+<%- include('../components/footer-bottom.ejs') %>

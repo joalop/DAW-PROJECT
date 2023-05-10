@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <style>
+        *{
+            padding: 0;
+            margin: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+          }
+          .class, #seccion3, #seccion2, #seccion1{
+            width: 20rem;
+            height: 10rem;
+            box-shadow: 2px 2px 2px black;
+            border-radius: 20px;
+            background-color: aqua;
+          }
+
+          #seccion1{
+            background-color: brown;
+          }
+
+          #secciones{
+            margin-top: 4rem;
+          }
+
+    </style>
+</head>
+<body>
+    
+    <div id="secciones" class="class">
+        <h2> Secciones</h2>
+        <p>Contenido de la Sección 1</p>
+        <a href="#seccion1">Ir a Sección 1</a>
+    </div>
+
+    <div class="class">
+        <h2>Otra Sección 1</h2>
+        <p>Contenido de la Sección 1</p>
+    </div>
+
+    <div class="class">
+        <h2>Otra Sección 1</h2>
+        <p>Contenido de la Sección 1</p>
+    </div>
+
+    <div class="class">
+        <h2>Otra Sección 1</h2>
+        <p>Contenido de la Sección 1</p>
+    </div>
+
+    <div class="class">
+        <h2>Otra Sección 1</h2>
+        <p>Contenido de la Sección 1</p>
+    </div>
+
+    <div class="class">
+        <h2>Otra Sección 1</h2>
+        <p>Contenido de la Sección 1</p>
+    </div>
+
+    <div id="seccion3">
+        <h2>Otra Sección 1</h2>
+        <p>Contenido de la Sección 1</p>
+    </div>
+
+    <div id="seccion2">
+        <h2>Otra Sección 1</h2>
+        <p>Contenido de la Sección 1</p>
+    </div>
+
+    <div id="seccion1">
+        <h2>Sección 1</h2>
+        <p>Contenido de la Sección 1</p>
+        <a href="#secciones">Ir a Sección 1</a>
+    </div>
+
+    <div class="class">
+        <h2>Otra Sección 1</h2>
+        <p>Contenido de la Sección 1</p>
+    </div>
+
+    <div class="class">
+        <h2>Otra Sección 1</h2>
+        <p>Contenido de la Sección 1</p>
+    </div>
+
+    <div class="class">
+        <h2>Otra Sección 1</h2>
+        <p>Contenido de la Sección 1</p>
+    </div>
+
+    <div class="class">
+        <h2>Otra Sección 1</h2>
+        <p>Contenido de la Sección 1</p>
+    </div>
+
+    <div class="class">
+        <h2>Otra Sección 1</h2>
+        <p>Contenido de la Sección 1</p>
+    </div>
+
+
+
+
+
+    
+
+
+    <script>
+        
+    // Esperar a que el contenido de la página se cargue completamente
+    window.onload = function() {
+        // Obtener todos los enlaces "a" de la página
+        var links = document.getElementsByTagName("a");
+
+        // Recorrer Todos Los enlaces Obtenidos de la página
+        for (var i = 0; i < links.length; i++) {
+
+            // Verificar si el enlace apunta a un ID dentro de la página
+            if (links[i].href.indexOf("#") != -1) {
+                // Si es un enlace que apunta al a misma página
+
+                // Agregar un listener de clic a los enlaces == a  addEventListener()
+                links[i].onclick = function() {
+
+                    // Obtener el elemento correspondiente al ID en el atributo href del enlace
+                    var targetElement = document.getElementById(this.href.split("#")[1]);
+
+                    // Desplazarse al elemento correspondiente de manera suave
+                    targetElement.scrollIntoView({
+                        behavior: "smooth"
+                    });
+
+                    // Prevenir el comportamiento predeterminado del enlace
+                    return false;
+                };
+            }
+        }
+    };
+
+    </script>
+</body>
+</html>
