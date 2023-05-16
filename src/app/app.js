@@ -52,17 +52,19 @@ app.use(cookieParser());
 // ----------------------------------------------------
 
 // Static Files
-
 app.use( express.static(path.join(__dirname,"../public")) )
 // ----------------------------------------------------
 
 // Favicon
-
 app.use(favicon(path.join(__dirname, '../public/images/icons/Untitled-Design.ico'), { maxAge: 86400000 }));
 // ----------------------------------------------------
 
 // Comf Sesions
-
+app.use( sessions({
+   secret: '23@.net',
+   resave: true,
+   saveUninitialized: true,
+}))
 
 // Conf Multer
 

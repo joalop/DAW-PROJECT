@@ -44,7 +44,7 @@ router.post('/login', (req, res, next) => {
                         if( error ){ throw error }
                         if( response ){
                             // Ok
-                            res.render( 'templates/inicial.ejs', {} );
+                            res.render( 'templates/dashboard.ejs', {} );
 
                         }else{
                             res.render( 'templates/login', { respuesta_usuario_login: "Incorrect Password or Email" } );

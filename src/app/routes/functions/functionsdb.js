@@ -1,3 +1,4 @@
+const { pool } = require("../../database/connection");
 
  
  // FUNCIÓN para buscar todos los usuarios
@@ -44,6 +45,7 @@ async function buscar_email( pool, email ){
 }
 
 // FUNCIONES para registrar un usuario con fecha actual
+
 // FUNCIÓN para sacar la fecha actual en formato americano
 function hora_actual_formato_americano(){
     let fecha = new Date(); // fecha y hora actuales
@@ -51,15 +53,21 @@ function hora_actual_formato_americano(){
     let mes = fecha.getMonth() + 1; // obtener el mes (de 0 a 11)
     let dia = fecha.getDate(); // obtener el día del mes
     let fechaTexto = anio + '-' + ( mes < 10 ? '0' : '') + mes + '-' + (dia < 10 ? '0' : '') + dia;
-    return fechaTexto; // muestra la fecha en formato YYYY-MM-DD
+    return fechaTexto; // Fecha en formato YYYY-MM-DD
 }
+
 // FUNCIÓN asyncrona para registra un usuario en la base de datos
 async function registrar_usuario(pool, nombre, apellido, correo, contraseña, permiso, hora_actual = hora_actual_formato_americano()){
     const [ new_users ] = await pool.query(`insert into usuarios ( id_usuario, nombre, apellidos, usuario_chat, email, contrasenya, permisos, fecha_creacion, vigencia )
     values ( null, ?, ?, ?, ?, ?, ?, ?, null);`,[ String(nombre), String(apellido), String(nombre), String(correo), String(contraseña), permiso, String(hora_actual) ]);
 }
     
-
+// Funcion Para saber el Rol de un Usuario
+async function ReturRol(){
+    const [ rol ] = await pool.query(`select u.nombre, pu.nombre
+    from usuarios u, permisos_usuarios pu
+    where u.permisos = pu.id_permiso_usuario and u.nombre = 'admin';`, [])
+}
 
 module.exports = {
     todos_los_usuarios,
