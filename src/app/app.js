@@ -4,8 +4,8 @@ const logger = require('morgan');
 
 const cookieParser = require('cookie-parser');
 
-const sessions = require('express-session');
-const Sesions_mysql = require('express-mysql-session');
+const session = require('express-session');
+const sesions_mysql = require('express-mysql-session')(session);
 
 const favicon = require('serve-favicon');
 
@@ -60,11 +60,28 @@ app.use(favicon(path.join(__dirname, '../public/images/icons/Untitled-Design.ico
 // ----------------------------------------------------
 
 // Comf Sesions
-app.use( sessions({
+// app.use( sessions({
+//    secret: '23@.net',
+//    resave: true,
+//    saveUninitialized: true,
+// }))
+const options = {
+   host: 'localhost',
+   port: 3306,
+   user: 'root',
+   password: 'root',
+   database: 'managebd',
+};
+
+const sessionStore = new sesions_mysql( options );
+//
+app.use( session({
+   key: 'cookie_user',
    secret: '23@.net',
-   resave: true,
-   saveUninitialized: true,
-}))
+   store: sessionStore,
+   resave: false,
+   saveUninitialized: false,
+}) )
 
 // Conf Multer
 

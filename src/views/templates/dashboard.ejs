@@ -12,30 +12,42 @@
 
 </head>
 <body>
-    <h2>Hola mundo</h2>
-
+    
     <main>
 
         <header>
             <nav>
+                <div class="logo">
+                    <img src="/images/Untitled-Design.png" alt="">
+                </div>
+
                 <ul>
+                    <% if( user_permision == 'ADMINISTRATOR' ){%>
+                        
                     <li> Edit Users <i class="fa-solid fa-user-pen"></i> </li>
-                    <li> User Name <i class="fa-solid fa-user"></i> </li>
-                    <li> User Email <i class="fa-solid fa-envelope"></i> </li>
-                    <li>  User Type <i class="fa-solid fa-lock"></i> <i class="fa-solid fa-unlock"></i> <i class="fa-solid fa-hat-cowboy"></i> </li>
+
+                    <% } %>
+
+                    <li> <%= user_name %> <i class="fa-solid fa-user"></i> </li>
+                    <li> <%= user_email %> <i class="fa-solid fa-envelope"></i> </li>
+                    <li>  <%= user_permision %> <i class="fa-solid fa-lock"></i> <i class="fa-solid fa-unlock"></i> <i class="fa-solid fa-hat-cowboy"></i> </li>
                     <li> Dashboard <i class="fa-solid fa-cube"></i> </li>
-                    <li> user Profile <i class="fa-regular fa-id-card"></i> </li>
-                    <li> Config <i class="fa-solid fa-sliders"></i> </li>
+                    <li> Profile <i class="fa-regular fa-id-card"></i> </li>
+                    <li> settings <i class="fa-solid fa-sliders"></i> </li>
                     <li> Log Out <i class="fa-solid fa-right-from-bracket"></i> <i class="fa-solid fa-toggle-off"></i> </li>
                 </ul>
-                <div class="hamburgeuer"> <i class="fa-solid fa-bars"></i> </div>
+
+                <div class="hamburgeuer" hidden>
+                    <i class="fa-solid fa-bars"></i>
+                </div>
             </nav>
         </header>
-    
+        
+        <h2>Hola mundo</h2>
 
         <div id="dasboard-body">
             <div class="grupos container">
-                <i class="fa-solid fa-user-group"></i> <i class="fa-solid fa-plus"></i> <i class="fa-solid fa-eye"></i> <i class="fa-solid fa-eye-slash"></i> <i class="fa-solid fa-ban"></i><i class="fa-solid fa-diagram-project"></i> <i class="fa-solid fa-circle-half-stroke"></i>
+                <i class="fa-solid fa-user-group"></i> <i class="fa-solid fa-plus"></i>  <i class="fa-solid fa-ban"> </i><i class="fa-solid fa-diagram-project"></i> <i class="fa-solid fa-circle-half-stroke"></i>
             </div>
             <div class="nota container">
                 <i class="fa-solid fa-plus"></i>  <i class="fa-solid fa-note-sticky"></i> <i class="fa-solid fa-square-minus"></i>

@@ -8,7 +8,7 @@ const bcryp = require('bcrypt');
 const pool = require('../database/connection')
 
 // FUNCIONES DB
-const { todos_los_usuarios, buscar_usuario, buscar_email, registrar_usuario, } = require('./functions/functionsdb')
+const { todos_los_usuarios, saca_data_user, buscar_usuario, buscar_email, nom_permiso_usuario, registrar_usuario, } = require('./functions/functionsdb')
 
 // FUNCIONES DB
 const { validaciones_correo } = require('./functions/validaciones')
@@ -35,21 +35,42 @@ router.post('/login', (req, res, next) => {
         buscar_usuario( pool, req.body.email, req.body.password )
         .then( response => {
             //console.log( 'Respuesta', response[0].contrasenya );
-            console.log( 'Respuesta', response );
+            //console.log( 'Respuesta', response );
 
             if(response[0] == true){
                 //Compara con contaseña encriptada
                 bcryp.compare(req.body.password, response[1], ( error, response ) => {
                     try{
-                        if( error ){ throw error }
+                        if( error ){ throw error };
+                        
                         if( response ){
                             // Ok
-                            res.render( 'templates/dashboard.ejs', {} );
+
+                            let user_profile = saca_data_user(pool, req.body.email)
+                            user_profile.then( response => {
+
+                                req.session.id_usuario = response[0].id_usuario;
+                                req.session.nombre = response[0].nombre;
+                                req.session.email = response[0].email;
+                                req.session.permiso_id = response[0].permisos;
+
+                                //console.log('Response: ', response);
+                                //console.log('Response permiso: ', response[0].permisos );
+
+                                let permiso_name = nom_permiso_usuario(pool, req.session.permiso_id);
+                                permiso_name.then( ( permiso ) => {
+                                    console.log('Response: ', permiso)
+                                    //
+                                    req.session.permiso_name = permiso[0].nombre;  // 'USER', 'ADMINISTRATOR'
+
+                                    res.render( 'templates/dashboard.ejs', { user_name: req.session.nombre, user_email: req.session.email, user_permision: req.session.permiso_name } );
+                                });
+                            });
 
                         }else{
                             res.render( 'templates/login', { respuesta_usuario_login: "Incorrect Password or Email" } );
 
-                        }
+                        };
                         
                     }catch( error){
                         console.log( error );
@@ -136,6 +157,14 @@ router.post('/register', (req, res, next) => {
             console.log(error)
         }
 });
+
+
+
+router.get('/dashboard', (req, res, next) => {
+    res.render( 'templates/dashboard.ejs', { user_name: req.session.nombre, user_email: req.session.email, user_permision: req.session.permiso_name } );
+});
+
+
 
 // -----------------------------
 // ------- OTHERS ROUTES -------

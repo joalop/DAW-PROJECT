@@ -107,8 +107,21 @@
         <h2> SIGN IN </h2>
         <section class="fomulario">
             <form action="/login" method="post" id="formulario">
-                <input type="text" name="email" id="" placeholder="Email">
-                <input type="password" name="password" id="" placeholder="Password">
+                <div class="zone_mail_login">
+                    <input type="text" name="email" id="" placeholder='Email'>
+                    <div class="mail_login">
+                        <i class="fa-solid fa-envelope"></i>
+                    </div>
+                </div>
+                
+
+                <div class="zone_eye_password">
+                    <input type="password" name="password" id="" placeholder="Password">
+                    <div class="eye_password">
+                        <i class="fa-solid fa-eye"></i> <i class="fa-solid fa-eye-slash"></i> <i class='fa-solid fa-lock'></i>
+                    </div>
+                </div>
+                
                 <input type="submit" value="Login">
             </form>
             <div class="sign-up">Don't have an account, you can <a href="/register"> SIGN UP </a></div>

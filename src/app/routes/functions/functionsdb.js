@@ -8,6 +8,13 @@ const { pool } = require("../../database/connection");
         console.log( users )
 }
 
+ // FUNCIÓN para Devolver datos de un Usuario
+ async function saca_data_user(pool, email){
+    const [ users ] = await pool.query('SELECT * FROM usuarios WHERE email = ? ',[ email ]);
+
+    return users;
+}
+
 // FUNCIÓN para Buscar un usuario en la tabla usuarios
 async function buscar_usuario( pool, email, contraseña ){
     let encontrado;
@@ -41,8 +48,17 @@ async function buscar_email( pool, email ){
     }else{
         encontrado = false;
     }
-    return encontrado
+    return encontrado;
 }
+
+// Funcion para averiguar nombre del permiso de un usuario
+async function nom_permiso_usuario(pool, permiso_usuario){
+    const [ permisos ] = await pool.query(`select pu.nombre
+    from usuarios u, permisos_usuarios pu
+    where u.permisos = pu.id_permiso_usuario and pu.id_permiso_usuario = ? ;`,[ permiso_usuario ]);
+    return permisos;
+}
+
 
 // FUNCIONES para registrar un usuario con fecha actual
 
@@ -61,17 +77,13 @@ async function registrar_usuario(pool, nombre, apellido, correo, contraseña, pe
     const [ new_users ] = await pool.query(`insert into usuarios ( id_usuario, nombre, apellidos, usuario_chat, email, contrasenya, permisos, fecha_creacion, vigencia )
     values ( null, ?, ?, ?, ?, ?, ?, ?, null);`,[ String(nombre), String(apellido), String(nombre), String(correo), String(contraseña), permiso, String(hora_actual) ]);
 }
-    
-// Funcion Para saber el Rol de un Usuario
-async function ReturRol(){
-    const [ rol ] = await pool.query(`select u.nombre, pu.nombre
-    from usuarios u, permisos_usuarios pu
-    where u.permisos = pu.id_permiso_usuario and u.nombre = 'admin';`, [])
-}
+
 
 module.exports = {
     todos_los_usuarios,
+    saca_data_user,
     buscar_usuario,
     buscar_email,
+    nom_permiso_usuario,
     registrar_usuario,
 }
