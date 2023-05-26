@@ -1,47 +1,25 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+<%# HEAD TOP 1/2 %>
+<%- include('../components/head-top.ejs') %>
 
-    <link rel="stylesheet" href="/styles/nav_menu.css">
+<%# --------------------------------------------- %>
+<%# GENERAL STYLES %>
+<link rel="stylesheet" href="/styles/uiniversal-general-styles.css">
 
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+<!-- FONTS -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300&display=swap" rel="stylesheet">
+
+<!-- ICONS -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+<%# --------------------------------------------- %>
+
+<link rel="stylesheet" href="/styles/nav_menu.css">
 
 </head>
 <body>
-    
     <main>
-
-        <header>
-            <nav>
-                <div class="logo">
-                    <img src="/images/Untitled-Design.png" alt="">
-                </div>
-
-                <ul>
-                    <% if( user_permision == 'ADMINISTRATOR' ){%>
-                        
-                    <li> Edit Users <i class="fa-solid fa-user-pen"></i> </li>
-
-                    <% } %>
-
-                    <li> <%= user_name %> <i class="fa-solid fa-user"></i> </li>
-                    <li> <%= user_email %> <i class="fa-solid fa-envelope"></i> </li>
-                    <li>  <%= user_permision %> <i class="fa-solid fa-lock"></i> <i class="fa-solid fa-unlock"></i> <i class="fa-solid fa-hat-cowboy"></i> </li>
-                    <li> Dashboard <i class="fa-solid fa-cube"></i> </li>
-                    <li> Profile <i class="fa-regular fa-id-card"></i> </li>
-                    <li> settings <i class="fa-solid fa-sliders"></i> </li>
-                    <li> Log Out <i class="fa-solid fa-right-from-bracket"></i> <i class="fa-solid fa-toggle-off"></i> </li>
-                </ul>
-
-                <div class="hamburgeuer" hidden>
-                    <i class="fa-solid fa-bars"></i>
-                </div>
-            </nav>
-        </header>
+        <%- include("../components/nav/nav_menu.ejs") %>
         
         <h2>Hola mundo</h2>
 
@@ -60,6 +38,21 @@
 
         </div>
     </main>
+
+    <script>
+        let ul = document.querySelector('.ul');
+        let logo = document.getElementsByClassName('hamburger')[0];
+
+       logo.addEventListener('click', ( event) => {
+            if( ul.classList.contains('show') ){
+                ul.classList.remove('show');
+            }else{
+                ul.classList.add('show');
+            }
+
+        });
+
+    </script>
 
 </body>
 </html>

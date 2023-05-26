@@ -1,142 +1,126 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+<%# HEAD TOP 1/2 %>
+<%- include('../components/head-top.ejs') %>
 
-    <%# FONTS %>
-    <%- include('../modules/link-fonts/link-fonts.ejs') %>
+<%# --------------------------------------------- %>
+<%# GENERAL STYLES %>
+<link rel="stylesheet" href="/styles/uiniversal-general-styles.css">
 
-    <%# ICONS %>
-    <%- include('../modules/link-icons/link-icons.ejs') %>
+<!-- FONTS -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300&display=swap" rel="stylesheet">
 
-    <%# STYLES NAV %>
-    <%- include('../modules/link-nav-style/nav-styles.ejs') %>
+<!-- ICONS -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+<%# --------------------------------------------- %>
 
-    <style>
+<%# INICIAL STYLES %>
+<%- include('../modules/link-inicial/inicial-styles.ejs') %>
 
-        body{
-            /*
-            background: rgb(154,255,253);
-            background: linear-gradient(90deg, rgba(154,255,253,1) 11%, rgba(123,192,228,1) 34%, rgba(63,13,218,1) 100%);
-            */
-            /*
-            background-image: url('https://cdn.ipadizate.com/2021/06/wallpaper-macOS-12-moterey-claro.jpg');
-            */
-            /*
-            background-image: url('https://i.blogs.es/9df83a/mac/840_560.jpeg');
-            */
-            /*
-            background-image: url('https://4kwallpapers.com/images/wallpapers/macos-monterey-stock-red-dark-mode-layers-5k-7680x4320-5893.jpg');
-            */
+<%# STYLES NAV %>
+<%- include('../modules/link-nav-style/nav-styles.ejs') %>
 
-            background-image: url('https://4kwallpapers.com/images/wallpapers/macos-monterey-stock-blue-light-layers-5k-5120x2880-5898.jpg');
-            background-size: cover;
-            background-repeat: no-repeat;
+<%# Formulario STYLES %>
+<link rel="stylesheet" href="/styles/inicio-formularios.css">
 
-            /*
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            */
-        }
+<%# HEAD BOTTOM "2/2 %>
+<%- include('../components/head-bottom.ejs') %>
 
+<%# div.principal>section.fomulario>form:post>label+input^^section.pruebas %>
 
-        main{
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-
-            margin-top: 12rem;
-        }
-
-
-        .principal{
-            
-            width: fit-content;
-
-            background-color: white;
-
-            padding: 30px;
-            border-radius: 20px;
-        }
-
-        #formulario{
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-        }
-
-        #formulario input{
-            width: 12rem;
-            margin: 0.5rem;
-
-            border: 0.01px solid black;
-            border-radius: 10px;
-
-            font-size: 16px;
-            font-weight: bold;
-
-            padding-top: 10px;
-            padding-bottom: 10px;
-            padding-left: 10px;
-        }
-
-        .reaccion{
-            color: brown;
-            font-size: 16px;
-            font-weight: bold;
-        }
-
-    </style>
-</head>
-<body>
-    
-
-    <%# Header + Nav Component %>
-    <%- include('../components/nav/nav.ejs') %>
-
-    <%# div.principal>section.fomulario>form:post>label+input^^section.pruebas %>
 <main>
-    <div class="principal">
-        <h2> SIGN IN </h2>
-        <section class="fomulario">
-            <form action="/login" method="post" id="formulario">
-                <div class="zone_mail_login">
-                    <input type="text" name="email" id="" placeholder='Email'>
-                    <div class="mail_login">
-                        <i class="fa-solid fa-envelope"></i>
-                    </div>
-                </div>
-                
+    <%# Header + Nav Component %>
+    <%- include('../components/nav/nav_inicio.ejs') %>
+    <section class="seccion-centrada">
+        <div class="principal">
+            <h2> SIGN IN </h2>
+            <section class="fomulario">
+                <form action="/login" method="post" id="formulario">
 
-                <div class="zone_eye_password">
-                    <input type="password" name="password" id="" placeholder="Password">
-                    <div class="eye_password">
-                        <i class="fa-solid fa-eye"></i> <i class="fa-solid fa-eye-slash"></i> <i class='fa-solid fa-lock'></i>
+                    <div class="zone_mail_login">
+                        <input type="text" name="email" placeholder='Email'>
+                        <div class="email_login">
+                            <i class="fa-solid fa-envelope"></i>
+                        </div>
                     </div>
-                </div>
-                
-                <input type="submit" value="Login">
-            </form>
-            <div class="sign-up">Don't have an account, you can <a href="/register"> SIGN UP </a></div>
-        </section>
-        <section class="pruebas">
-            <% if( respuesta_usuario_login != "" ){ %>
-                <!-- p.reaccion{ <%#= respuesta_usuario_login %> } -->
-                <p class="reaccion">
-                    <%= respuesta_usuario_login %>
-                </p>
-            <% } %>
-        </section>
-    </div>
+                    
+                    <div class="zone_eye_password">
 
+                        <input type="password" name="password" id="tipo_contraseña" placeholder="Password">
+                        <div class="eye_password-open" hidden>
+                            <i class="fa-solid fa-eye open-eye"></i> <i class="fa-solid fa-lock-open open-eye"></i>
+                        </div>
+                        <div class="eye_password-close">
+                            <i class="fa-solid fa-eye-slash cerrado-eye"></i> <i class='fa-solid fa-lock cerrado-eye'></i>
+                        </div>
+
+                    </div>
+
+                    <div class="button-submit">
+                        <input type="submit" value="Login">
+                    </div>
+
+                </form>
+                <div class="sign-up">Don't have an account, you can <a href="/register"> SIGN UP </a></div>
+            </section>
+            <section class="pruebas">
+                <% if( respuesta_usuario_login != "" ){ %>
+                    <!-- p.reaccion{ <%#= respuesta_usuario_login %> } -->
+                    <p class="reaccion">
+                        <%= respuesta_usuario_login %>
+                    </p>
+                <% } %>
+
+                <% if( comments != "" ){ %>
+                    <p class="reaccion">
+                        <%= comments %>
+                    </p>
+                <% } %>
+            </section>
+        </div>
+    </section>
 </main>
+
+<script>
+    let ul = document.querySelector('.ul');
+    let logo = document.getElementsByClassName('hamburger')[0];
+
+   logo.addEventListener('click', ( event) => {
+        if( ul.classList.contains('show') ){
+            ul.classList.remove('show');
+        }else{
+            ul.classList.add('show');
+        }
+
+    });
+
+//
+let cerrado_eye = document.querySelectorAll('.cerrado-eye');
+let open_eye = document.querySelectorAll('.open-eye');
+
+//
+let eye_password_close = document.querySelector('.eye_password-close');
+let eye_password_open = document.querySelector('.eye_password-open');
+let tipo_contraseña = document.querySelector('#tipo_contraseña');
+
+cerrado_eye.forEach( elemento => {
+    elemento.style.cursor = "pointer";
+    elemento.addEventListener('click', () => {
+        tipo_contraseña.type = "text";
+        eye_password_close.style.display = "none";
+        eye_password_open.style.display = "flex";
+    });
+});
+
+open_eye.forEach( elem => {
+    elem.style.cursor = "pointer";
+    elem.addEventListener('click', () => {
+        tipo_contraseña.type = "password";
+        eye_password_close.style.display = "flex";
+        eye_password_open.style.display = "none";
+    });
+});
+</script>
 
 </body>
 </html>

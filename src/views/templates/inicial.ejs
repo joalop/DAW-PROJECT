@@ -1,11 +1,18 @@
 <%# HEAD TOP 1/2 %>
 <%- include('../components/head-top.ejs') %>
 
-<%# FONTS %>
-<%- include('../modules/link-fonts/link-fonts.ejs') %>
+<%# --------------------------------------------- %>
+<%# GENERAL STYLES %>
+<link rel="stylesheet" href="/styles/uiniversal-general-styles.css">
 
-<%# ICONS %>
-<%- include('../modules/link-icons/link-icons.ejs') %>
+<!-- FONTS -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300&display=swap" rel="stylesheet">
+
+<!-- ICONS -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+<%# --------------------------------------------- %>
 
 <%# INICIAL STYLES %>
 <%- include('../modules/link-inicial/inicial-styles.ejs') %>
@@ -14,15 +21,6 @@
 <%- include('../modules/link-nav-style/nav-styles.ejs') %>
 
 <style>
-
-    main{
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        align-items: center;
-
-        margin-top: 6rem;
-    }
 
     footer {
 
@@ -34,7 +32,6 @@
     }
 
     footer div{
-
         display: flex;
         flex-direction: row;
         justify-content: space-between;
@@ -50,8 +47,8 @@
 
     footer div ul li{
         margin: 0 0.25rem;
-        width: 5rem;
-        padding: 10px;
+        width: 3rem;
+        padding: 5px;
         border: 0.01px solid black;
         border-radius: 10px;
     }
@@ -60,10 +57,10 @@
 <%# HEAD BOTTOM "2/2 %>
 <%- include('../components/head-bottom.ejs') %>
 
-    <%# HEADER + NAV COMPONENT %>
-    <%- include('../components/nav/nav.ejs') %>
-
     <main>
+
+        <%# HEADER + NAV COMPONENT %>
+        <%- include('../components/nav/nav_inicio.ejs') %>
         
         <section class="main-body">
             <h2>Inicio</h2>
@@ -71,6 +68,21 @@
 
         <%# FOOTER COMPONENT %>
         <%- include('../components/footer/footer.ejs') %>
+
+        <script>
+            let ul = document.querySelector('.ul');
+            let logo = document.getElementsByClassName('hamburger')[0];
+    
+           logo.addEventListener('click', ( event) => {
+                if( ul.classList.contains('show') ){
+                    ul.classList.remove('show');
+                }else{
+                    ul.classList.add('show');
+                }
+    
+            });
+    
+        </script>
 
     </main>
 

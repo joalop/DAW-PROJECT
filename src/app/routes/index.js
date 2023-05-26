@@ -3,16 +3,21 @@ const router = express.Router()
 
 const bcryp = require('bcrypt');
 
+// Login coments
+let comments = "";
+
 
 // CONST POOL
 const pool = require('../database/connection')
-
-// FUNCIONES DB
-const { todos_los_usuarios, saca_data_user, buscar_usuario, buscar_email, nom_permiso_usuario, registrar_usuario, } = require('./functions/functionsdb')
-
-// FUNCIONES DB
-const { validaciones_correo } = require('./functions/validaciones')
 // ----------------------
+// FUNCIONES DB
+const { todos_los_usuarios, saca_data_user, buscar_usuario, buscar_email, nom_permiso_usuario, registrar_usuario, } = require('./functions/functionsdb');
+// ----------------------
+// FUNCIONES DB
+const { validaciones_correo } = require('./functions/validaciones');
+// ----------------------
+// FUNCIONES MIDDLEWARE
+const { have_session } = require('./middleware/session');
 
 // GET '/' INDEX
 router.get('/', (req, res, next) => {
@@ -21,22 +26,16 @@ router.get('/', (req, res, next) => {
 
 // GET LOGIN
 router.get('/login', (req, res, next) => {
-    res.render('templates/login.ejs', { respuesta_usuario_login: "" })
+    
+    res.render('templates/login.ejs', { comments, respuesta_usuario_login: "", })
 });
 
 // POST LOGIN
 router.post('/login', (req, res, next) => {
-
-    //console.log( req.body )
-
-    
     // COMPROVANDO  EN LA PROMESA, SI EL USUARIO YA EXISTE, Devuelve en [0] True si el usuario existe y False si no, [1] la contrasenya encriptada
     try{
         buscar_usuario( pool, req.body.email, req.body.password )
         .then( response => {
-            //console.log( 'Respuesta', response[0].contrasenya );
-            //console.log( 'Respuesta', response );
-
             if(response[0] == true){
                 //Compara con contaseña encriptada
                 bcryp.compare(req.body.password, response[1], ( error, response ) => {
@@ -68,7 +67,7 @@ router.post('/login', (req, res, next) => {
                             });
 
                         }else{
-                            res.render( 'templates/login', { respuesta_usuario_login: "Incorrect Password or Email" } );
+                            res.render( 'templates/login', { comments, respuesta_usuario_login: "Incorrect Password or Email" } );
 
                         };
                         
@@ -78,7 +77,7 @@ router.post('/login', (req, res, next) => {
                     }
                 });
             } else {
-                res.render( 'templates/login', { respuesta_usuario_login: "Incorrect Password or Email" } );
+                res.render( 'templates/login', { comments, respuesta_usuario_login: "Incorrect Password or Email" } );
             }
 
         });
@@ -160,10 +159,19 @@ router.post('/register', (req, res, next) => {
 
 
 
-router.get('/dashboard', (req, res, next) => {
+router.get('/dashboard', have_session, (req, res, next) => {
     res.render( 'templates/dashboard.ejs', { user_name: req.session.nombre, user_email: req.session.email, user_permision: req.session.permiso_name } );
 });
 
+router.get('/logout', have_session, (req, res) => {
+    req.session.destroy((err) => {
+      if (err) {
+        console.log('Error al destruir la sesión:', err);
+      } else {
+        res.redirect('/login');
+      }
+    });
+  });
 
 
 // -----------------------------
