@@ -158,11 +158,37 @@ router.post('/register', (req, res, next) => {
 });
 
 
-
+// GET DASHBOARD
 router.get('/dashboard', have_session, (req, res, next) => {
-    res.render( 'templates/dashboard.ejs', { user_name: req.session.nombre, user_email: req.session.email, user_permision: req.session.permiso_name } );
+    res.render( 'templates/dashboard.ejs', {
+        user_name: req.session.nombre,
+        user_email: req.session.email,
+        user_permision: req.session.permiso_name,
+    });
 });
 
+// GET ADMIN
+router.get('/admin', have_session, (req, res, next) => {
+    try{
+        todos_los_usuarios(pool)
+        .then( response2 => {
+                //console.log(response2);
+
+                res.render('templates/private/admin.ejs', {
+                    user_name: req.session.nombre,
+                    user_email: req.session.email,
+                    user_permision: req.session.permiso_name,
+                    usuarios:  response2,
+                });
+        });
+
+    }catch( error ){
+        console.log( error );
+    }
+        
+});
+
+// GET LOGOUT
 router.get('/logout', have_session, (req, res) => {
     req.session.destroy((err) => {
       if (err) {
@@ -188,7 +214,7 @@ router.get('/ElemensDelay', (req, res, next) => {
 
 // GET SlowTransition
 router.get('/SlowTransition',(req, res, next) => {
-    res.render('./utils/transition')
+    res.render('./utils/transition');
  });
 
  // GET LastPOsition

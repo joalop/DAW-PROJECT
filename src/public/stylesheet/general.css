@@ -3,4 +3,10 @@
   padding: 0;
   box-sizing: 0;
   font-family: "Poppins", sans-serif;
+}
+
+.no-seleccionable {
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  user-select: none;
 }/*# sourceMappingURL=general.css.map */

@@ -1,0 +1,80 @@
+.main-body {
+  margin-top: 6rem;
+  height: 50rem;
+  background: linear-gradient(90deg, rgb(154, 255, 253) 11%, rgb(123, 192, 228) 34%, rgb(63, 13, 218) 100%);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.main-body .ver-usuarios {
+  height: 25rem;
+  padding: 5px;
+  background-color: #fff;
+  border-radius: 10px;
+  overflow: hidden;
+  overflow-x: hidden;
+  overflow-y: auto;
+}
+.main-body .ver-usuarios .leyenda-usuarios {
+  display: flex;
+  flex-direction: row;
+}
+.main-body .ver-usuarios .leyenda-usuarios .centrar-leyenda {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  align-content: center;
+  margin: 0 0.068rem;
+  padding: 5px 0;
+  width: 8.6rem;
+  background: linear-gradient(260deg, rgba(49, 4, 152, 0.7363737731) 17%, rgb(14, 0, 120) 60%);
+  border-radius: 10px;
+}
+.main-body .ver-usuarios .leyenda-usuarios .centrar-leyenda p {
+  box-shadow: 1px 1px 0.5px 2px #9FE3F3;
+  color: #fff;
+  text-shadow: 2px 2px 0 #000;
+  font-weight: bold;
+  padding: 5px;
+  border-radius: 10px;
+  text-align: center;
+}
+.main-body .ver-usuarios .usuario {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  margin: 0.25rem 0;
+  width: 98%;
+}
+.main-body .ver-usuarios .usuario p {
+  margin: 0 0.15rem;
+  width: 8.6rem;
+  border-radius: 10px;
+  box-shadow: 1px 1px 0.5px 1px #000000;
+  text-align: center;
+  font-weight: bold;
+}
+.main-body .isercion_usuario {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 15rem;
+  padding: 5px;
+  background-color: #fff;
+  border-radius: 10px;
+}
+.main-body .isercion_usuario .leyenda-insercion .centrar-leyenda {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  align-content: center;
+  margin: 0 0.068rem;
+  padding: 5px 0;
+  width: 8.6rem;
+  background: linear-gradient(260deg, rgba(49, 4, 152, 0.7363737731) 17%, rgb(14, 0, 120) 60%);
+  border-radius: 10px;
+}/*# sourceMappingURL=users_admin.css.map */

@@ -11,7 +11,7 @@
                 <li class="user-profile"> <% if(user_permision == 'ADMINISTRATOR'){ %> <i class="fa-solid fa-hat-cowboy"></i> ADMIN <% }else{ %> <i class="fa-solid fa-user"></i> USER <% } %>  <i class="fa-solid fa-lock"></i> <i class="fa-solid fa-unlock"></i> </li>
                 
                 <% if( user_permision == 'ADMINISTRATOR' ){%>
-                    <li> <a href=""> <i class="fa-solid fa-user-pen" ></i> Edit Users </a> </li>
+                    <li> <a href="/admin"> <i class="fa-solid fa-user-pen" ></i> Edit Users </a> </li>
                 <% } %>
 
                 <li> <a href="/dashboard"> <i class="fa-solid fa-cube"></i> Dashboard </a> </li>

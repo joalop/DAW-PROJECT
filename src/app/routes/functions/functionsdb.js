@@ -3,15 +3,13 @@ const { pool } = require("../../database/connection");
  
  // FUNCIÓN para buscar todos los usuarios
  async function todos_los_usuarios(pool){
-        const [ users ] = await pool.query('SELECT * FROM usuarios;');
-    
-        console.log( users )
+        const [ users ] = await pool.query('SELECT nombre, apellidos, usuario_chat, email, contrasenya, permisos, DATE_FORMAT(fecha_creacion, "%Y-%m-%d") AS fecha_formateada, vigencia FROM usuarios;');
+        return users;
 }
 
  // FUNCIÓN para Devolver datos de un Usuario
  async function saca_data_user(pool, email){
     const [ users ] = await pool.query('SELECT * FROM usuarios WHERE email = ? ',[ email ]);
-
     return users;
 }
 
