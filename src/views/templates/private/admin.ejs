@@ -18,153 +18,222 @@
 <link rel="stylesheet" href="/styles/users_admin.css">
 
 <%- include('../../components/head-bottom.ejs') %>
-    
     <main>
         <%- include("../../components/nav/nav_menu.ejs") %>
 
         <section class="main-body">
-
             <div class="ver-usuarios">
-                <section class="leyenda-usuarios">
-                    <div class="centrar-leyenda">
-                        <p> Nombre </p>
-                    </div>
-                    <div class="centrar-leyenda">
-                        <p> Apellidos</p>
-                    </div>
-                    <div class="centrar-leyenda">
-                        <p> Email </p>
-                    </div>
-                    <div class="centrar-leyenda">
-                        <p> Contraseña </p>
-                    </div>
-                    
-                    <div class="centrar-leyenda">
-                        <p> Permisos </p>
-                    </div>
-                    <div class="centrar-leyenda">
-                        <p> Creado <i class="fa-regular fa-calendar-days"></i></p>
-                    </div>
-                    <!-- <div class="centrar-leyenda">
-                        <p> Vigencia <i class="fa-regular fa-calendar-days"></i> </p>
-                    </div> -->
-                    <div class="centrar-leyenda">
-                        <p> EDIT </p>
-                    </div>
-                    <div class="centrar-leyenda">
-                        <p> DEL </p>
-                    </div>
-
-                </section>
-
                 <% for(let i = 0; i < usuarios.length; i++){ %>
-                    <section class="usuario">
 
-                        <div class="centrar-usuario">
-                            <p> <%- usuarios[i].nombre %> </p>
-                        </div>
-                        
-                        <div class="centrar-usuario">
-                            <p> <%- usuarios[i].apellidos %> </p>
-                        </div>
+                    <div class="contenedor-terciario-0">
 
-                        <div class="centrar-usuario">
-                            <p> <%- usuarios[i].email %> </p>
-                        </div>
-
-                        <div class="centrar-usuario">
-                            <p>
-                                <strong>
-                                    <i class="fa-solid fa-ellipsis"></i>
-                                    <i class="fa-solid fa-key"></i>
-                                </strong>
-                                <%#- elemento.contrasenya %>
-                            </p>
-                        </div>
-                        
-                        <div class="centrar-usuario">
-                            <p> <% if( usuarios[i].permisos == 1 ){ %> Admin <% }else{ %> User <% } %> </p>
-                        </div>
-                        
-                        <div class="centrar-usuario">
-                            <p> <%- usuarios[i].fecha_formateada %> </p>
-                        </div>
-                        
-                        <!-- <div class="centrar-usuario">
-                            <p> <%#- usuarios[i].vigencia %> </p>
-                        </div> -->
-                        
-                        <div class="centrar-usuario">
-                            <p class="update-user" onclick=" editar_usuario( `<%= usuarios[i].id_usuario %>` )">
-                                <i class="fa-solid fa-pen-to-square edit"></i>
-                            </p>
-                        </div>
-                        
-                        <div class="centrar-usuario delete-user" >
-                            <i class="fa-solid fa-square-minus del-function del-user<%- i %> disabled" onclick=" borrar_usuario(`<%= usuarios[i].id_usuario %>`)"> </i>
-
-                            <div class="close option-close<%- i %>">
-                                <i class="fa-solid fa-lock close-closed<%- i %>"> </i>
-                                <i class="fa-solid fa-toggle-on fa-rotate-180 close-closed<%- i %> block"></i>
+                        <div class="contendor-terciario-1">
+                            <div class="subcontenedor-terciario-1">
+                                <section class="leyenda-usuarios">
+                                    <div class="leyenda-ancha">
+                                        <p> Nombre </p>
+                                    </div>
+                                </section>
+                                <section class="usuario">
+                                    <div class="centrar-usuario-ancha">
+                                        <p> <%- usuarios[i].nombre %> </p>
+                                    </div>
+                                </section>
                             </div>
-                            
-                            <div class="open option-open<%- i %>">
-                                <i class="fa-solid fa-unlock open-opened<%- i %>"> </i>
-                                <i class="fa-solid fa-toggle-on open-opened<%- i %> elim"></i>
+
+                            <div class="subcontenedor-terciario-2">
+                                <section class="leyenda-usuarios">
+                                    <div class="centrar-leyenda">
+                                        <p> Apellidos</p>
+                                    </div>
+                                </section>
+                                <section class="usuario">
+                                    <div class="centrar-usuario">
+                                        <p> <%- usuarios[i].apellidos %> </p>
+                                    </div>
+                                </section>
+                            </div>
+
+                            <div class="subcontenedor-terciario-3">
+                                <section class="leyenda-usuarios">
+                                    <div class="centrar-leyenda">
+                                        <p> Contraseña </p>
+                                    </div>
+                                </section>
+                                <section class="usuario">
+                                    <div class="centrar-usuario">
+                                        <p>
+                                            <strong>
+                                                <i class="fa-solid fa-ellipsis"></i>
+                                                <i class="fa-solid fa-key"></i>
+                                            </strong>
+                                            <%#- elemento.contrasenya %>
+                                        </p>
+                                    </div>
+                                </section>
                             </div>
                         </div>
 
-                    </section>
+                        <div class="contendor-terciario-2">
+                            <div class="subcontenedor-terciario-1">
+                                <section class="leyenda-usuarios">
+                                    <div class="leyenda-ancha">
+                                        <p> Email </p>
+                                    </div>
+                                </section>
+                                <section class="usuario">
+                                    <div class="centrar-usuario-ancha">
+                                        <p> <%- usuarios[i].email %> </p>
+                                    </div>
+                                </section>
+                            </div>
+
+                            <div class="subcontenedor-terciario-2">
+                                <section class="leyenda-usuarios">
+                                    <div class="centrar-leyenda">
+                                        <p> Creado <i class="fa-regular fa-calendar-days"></i></p>
+                                    </div>
+                                </section>
+                                <section class="usuario">
+                                    <div class="centrar-usuario">
+                                        <p> <%- usuarios[i].fecha_formateada %> </p>
+                                    </div>
+                                </section>
+                            </div>
+
+                            <div class="subcontenedor-terciario-3">
+                                <section class="leyenda-usuarios">
+                                    <div class="centrar-leyenda">
+                                        <p> Vigencia <i class="fa-regular fa-calendar-days"></i> </p>
+                                    </div>
+                                </section>
+                                <section class="usuario">
+                                    <div class="centrar-usuario">
+                                        <p> <%- usuarios[i].vigencia %> </p>
+                                    </div>
+                                </section>
+                            </div>
+                        </div>
+
+                        <div class="contendor-terciario-3">
+                            <div class="subcontenedor-terciario-1">
+                                <section class="leyenda-usuarios">
+                                    <div class="leyenda-ancha">
+                                        <p> Permisos </p>
+                                    </div>
+                                </section>
+                                <section class="usuario">
+                                    <div class="centrar-usuario-ancha">
+                                        <p> <% if( usuarios[i].permisos == 1 ){ %> Admin <% }else{ %> User <% } %> </p>
+                                    </div>
+                                </section>
+                            </div>
+
+                            <div class="subcontenedor-terciario-2">
+                                <section class="leyenda-usuarios">
+                                    <div class="centrar-leyenda">
+                                        <p> EDIT </p>
+                                    </div>
+                                </section>
+                                <section class="usuario">
+                                    <div class="centrar-usuario">
+                                        <p class="update-user" onclick=" editar_usuario( `<%= usuarios[i].id_usuario %>` )">
+                                            <i class="fa-solid fa-pen-to-square edit"></i>
+                                        </p>
+                                    </div>
+                                </section>
+                            </div>
+
+                            <div class="subcontenedor-terciario-3">
+                                <section class="leyenda-usuarios">
+                                    <div class="centrar-leyenda">
+                                        <p> DEL </p>
+                                    </div>
+                                </section>
+                                <section class="usuario">
+                                    <div class="centrar-usuario delete-user" >
+                                        <i class="fa-solid fa-square-minus del-function del-user<%- i %> disabled" onclick=" borrar_usuario(`<%= usuarios[i].id_usuario %>`)"> </i>
+            
+                                        <div class="close option-close<%- i %>">
+                                            <i class="fa-solid fa-lock close-closed<%- i %>"> </i>
+                                            <i class="fa-solid fa-toggle-on fa-rotate-180 close-closed<%- i %> block"></i>
+                                        </div>
+                                        
+                                        <div class="open option-open<%- i %>">
+                                            <i class="fa-solid fa-unlock open-opened<%- i %>"> </i>
+                                            <i class="fa-solid fa-toggle-on open-opened<%- i %> elim"></i>
+                                        </div>
+                                    </div>
+                                </section>
+                            </div>
+
+                        </div>
+                    </div>
                 <% }; %>
             </div>
 
             <div class="isercion_usuario">
                 <h2>Insert User</h2>
 
-                <section class="leyenda-insercion">
-
-                    <div class="centrar-leyenda">
-                        <p> Nombre </p>
-                    </div>
-                    <div class="centrar-leyenda">
-                        <p> Apellidos</p>
-                    </div>
-                    
-                    <div class="centrar-leyenda">
-                        <p> Email </p>
-                    </div>
-                    <div class="centrar-leyenda">
-                        <p> Contraseña </p>
-                    </div>
-                    
-                </section>
-
-                <section class="datos-insercion">
-                    
-                    <div class="centrar-datos-insercion">
-                        <input type="text" name="nombre" class="nombre" placeholder="Name: ">
+                <div class="contenedor-insercion">
+                    <div class="subcontenedor-insercion-1">
+                        <section class="leyenda-insercion">
+                        <div class="centrar-leyenda">
+                            <p> Nombre </p>
+                        </div>
+                        </section>
+                        <section class="datos-insercion">
+                            <div class="centrar-datos-insercion">
+                                <input type="text" name="nombre" class="nombre" placeholder="Name: ">
+                            </div>
+                        </section>
                     </div>
 
-                    <div class="centrar-datos-insercion">
-                        <input type="text" name="apellidos" class="apellidos" placeholder="Last Name: ">
+                    <div class="subcontenedor-insercion-2">
+                        <section class="leyenda-insercion">
+                            <div class="centrar-leyenda">
+                                <p> Apellidos</p>
+                            </div>
+                        </section>
+                        <section class="datos-insercion">
+                            <div class="centrar-datos-insercion">
+                                <input type="text" name="apellidos" class="apellidos" placeholder="Last Name: ">
+                            </div>
+                        </section>
                     </div>
 
-                    <div class="centrar-datos-insercion">
-                        <input type="text" name="email" class="email" placeholder="Email: ">
+                    <div class="subcontenedor-insercion-3">
+                        <section class="leyenda-insercion">
+                            <div class="centrar-leyenda">
+                                <p> Email </p>
+                            </div>
+                        </section>
+                        <section class="datos-insercion">
+                            <div class="centrar-datos-insercion">
+                                <input type="text" name="email" class="email" placeholder="Email: ">
+                            </div>
+                        </section>
                     </div>
 
-                    <div class="centrar-datos-insercion">
-                        <input type="text" name="password" class="password" placeholder="Password: ">
+                    <div class="subcontenedor-insercion-4">
+                        <section class="leyenda-insercion">
+                            <div class="centrar-leyenda">
+                                <p> Contraseña </p>
+                            </div>
+                        </section>
+                        <section class="datos-insercion">
+                            <div class="centrar-datos-insercion">
+                                <input type="text" name="password" class="password" placeholder="Password: ">
+                            </div>
+                        </section>
                     </div>
-                </section>
+
+                </div>
+                
                 <button onclick="crear_usuario()"> Create User </button>
             </div>
-
         </section>
-
     </main>
-
-
 
     <script class=".no-seleccionable">
         //document.addEventListener('DOMContentLoaded', function() {
@@ -274,13 +343,8 @@
                         window.location.href = "http://localhost:3000/admin";
                     })
                 );
-                
            }
-
-           
         //});
-          
     </script>
-
 </body>
 </html>

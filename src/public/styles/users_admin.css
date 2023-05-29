@@ -1,54 +1,89 @@
 .main-body {
-  margin-top: 6rem;
-  height: 50rem;
+  margin-top: 3rem;
+  height: -moz-fit-content;
+  height: fit-content;
+  padding-top: 6rem;
+  padding-bottom: 100vh;
   background: linear-gradient(90deg, rgb(154, 255, 253) 11%, rgb(123, 192, 228) 34%, rgb(63, 13, 218) 100%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.main-body .ver-usuarios {
+  display: flex;
+  flex-wrap: wrap;
+  width: 69.5%;
+  height: 28rem;
+  padding: 4px 1;
+  background: linear-gradient(176deg, rgb(215, 254, 250) 24%, rgba(67, 131, 142, 0.935253325) 58%, rgb(67, 78, 142) 86%);
+  border-radius: 5px;
+  box-shadow: 2px 2px 1px 0.5px black;
+  overflow: hidden;
+  overflow-x: hidden;
+  overflow-y: auto;
+}
+.main-body .ver-usuarios .contenedor-terciario-0 {
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  padding: 4px 2px;
+  margin: 1rem 0.4rem;
+  box-shadow: 1.5px 1.5px 1px 1.5px #fff;
+  background: linear-gradient(176deg, rgb(255, 228, 164) 42%, rgb(92, 0, 68) 97%);
+  border-radius: 5px;
 }
-.main-body .ver-usuarios {
-  margin: 0;
-  height: 20rem;
-  padding-top: 5px;
-  padding-bottom: 5px;
-  padding-left: 5px;
-  padding-right: 0;
-  background-color: #fff;
-  border-radius: 10px;
-  overflow: hidden;
-  overflow-x: hidden;
-  overflow-y: auto;
+.main-body .ver-usuarios .contenedor-terciario-0 .contendor-terciario-1, .main-body .ver-usuarios .contenedor-terciario-0 .contendor-terciario-2, .main-body .ver-usuarios .contenedor-terciario-0 .contendor-terciario-3 {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+}
+.main-body .ver-usuarios .contenedor-terciario-0 .contendor-terciario-1 .subcontenedor-terciario-1, .main-body .ver-usuarios .contenedor-terciario-0 .contendor-terciario-1 .subcontenedor-terciario-2, .main-body .ver-usuarios .contenedor-terciario-0 .contendor-terciario-1 .subcontenedor-terciario-3, .main-body .ver-usuarios .contenedor-terciario-0 .contendor-terciario-2 .subcontenedor-terciario-1, .main-body .ver-usuarios .contenedor-terciario-0 .contendor-terciario-2 .subcontenedor-terciario-2, .main-body .ver-usuarios .contenedor-terciario-0 .contendor-terciario-2 .subcontenedor-terciario-3, .main-body .ver-usuarios .contenedor-terciario-0 .contendor-terciario-3 .subcontenedor-terciario-1, .main-body .ver-usuarios .contenedor-terciario-0 .contendor-terciario-3 .subcontenedor-terciario-2, .main-body .ver-usuarios .contenedor-terciario-0 .contendor-terciario-3 .subcontenedor-terciario-3 {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }
 .main-body .ver-usuarios .leyenda-usuarios {
   display: flex;
   flex-direction: row;
   margin: 0;
 }
+.main-body .ver-usuarios .leyenda-usuarios .leyenda-ancha {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 2.5px 0;
+  width: 15rem;
+  background: linear-gradient(265deg, rgb(164, 164, 255) 3%, rgb(10, 0, 92) 76%);
+  border-radius: 5px;
+}
+.main-body .ver-usuarios .leyenda-usuarios .leyenda-ancha p {
+  box-shadow: 0.5px 0.5px 0.5px 1px #9FE3F3;
+  color: #fff;
+  text-shadow: 1.6px 1px 0 #000;
+  font-weight: bold;
+  border-radius: 5px;
+  text-align: center;
+}
 .main-body .ver-usuarios .leyenda-usuarios .centrar-leyenda {
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  margin-left: 0.4rem;
-  padding-top: 5px;
-  padding-bottom: 5px;
-  padding-left: 5px;
-  padding-right: 0;
-  width: 8.6rem;
-  background: linear-gradient(260deg, rgba(49, 4, 152, 0.7363737731) 17%, rgb(14, 0, 120) 60%);
-  border-radius: 10px;
+  padding: 2.5px 0;
+  width: 8rem;
+  background: linear-gradient(265deg, rgb(164, 164, 255) 3%, rgb(10, 0, 92) 76%);
+  border-radius: 5px;
 }
 .main-body .ver-usuarios .leyenda-usuarios .centrar-leyenda p {
-  box-shadow: 0.5px 0.5px 0.5px 2px #9FE3F3;
+  box-shadow: 0.5px 0.5px 0.5px 1px #9FE3F3;
   color: #fff;
-  text-shadow: 2px 2px 0 #000;
+  text-shadow: 1.6px 1px 0 #000;
   font-weight: bold;
-  padding-top: 5px;
-  padding-bottom: 5px;
-  padding-left: 5px;
-  padding-right: 5px;
-  border-radius: 10px;
+  border-radius: 5px;
   text-align: center;
 }
 .main-body .ver-usuarios .usuario {
@@ -57,15 +92,79 @@
   justify-content: space-between;
   margin: 0.25rem 0;
 }
+.main-body .ver-usuarios .usuario div.centrar-usuario-ancha {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  margin: 0 0.15rem;
+  width: 15rem;
+  background: #fffff1;
+  border-radius: 5px;
+  box-shadow: 1px 1px 1px 1.25px #fff, 1.5px 1.5px 1px 1.5px #000;
+}
+.main-body .ver-usuarios .usuario div.centrar-usuario-ancha i.del-function {
+  cursor: pointer;
+}
+.main-body .ver-usuarios .usuario div.centrar-usuario-ancha i.edit {
+  cursor: pointer;
+}
+.main-body .ver-usuarios .usuario div.centrar-usuario-ancha i.delete {
+  cursor: pointer;
+}
+.main-body .ver-usuarios .usuario div.centrar-usuario-ancha i {
+  color: #982704;
+}
+.main-body .ver-usuarios .usuario div.centrar-usuario-ancha i.disabled {
+  /* Estilos para el icono desactivado */
+  color: #5a5452;
+  opacity: 0.5;
+  pointer-events: none;
+}
+.main-body .ver-usuarios .usuario div.centrar-usuario-ancha p {
+  text-align: center;
+  font-weight: bold;
+  font-size: 17px;
+}
+.main-body .ver-usuarios .usuario div.centrar-usuario-ancha p i {
+  color: #000;
+}
+.main-body .ver-usuarios .usuario div.centrar-usuario-ancha div.close {
+  display: flex;
+  flex-direction: row;
+  margin-left: 1rem;
+}
+.main-body .ver-usuarios .usuario div.centrar-usuario-ancha div.close i {
+  color: #000;
+  cursor: pointer;
+}
+.main-body .ver-usuarios .usuario div.centrar-usuario-ancha div.close i.block {
+  color: #982704;
+  cursor: pointer;
+}
+.main-body .ver-usuarios .usuario div.centrar-usuario-ancha div.open {
+  display: none;
+  flex-direction: row;
+  margin-left: 1rem;
+}
+.main-body .ver-usuarios .usuario div.centrar-usuario-ancha div.open i {
+  color: #000;
+  cursor: pointer;
+}
+.main-body .ver-usuarios .usuario div.centrar-usuario-ancha div.open i.elim {
+  color: green;
+  cursor: pointer;
+}
 .main-body .ver-usuarios .usuario div.centrar-usuario {
   display: flex;
   flex-direction: row;
   justify-content: center;
   align-items: center;
   margin: 0 0.15rem;
-  width: 8.6rem;
-  border-radius: 10px;
-  box-shadow: 1px 1px 0.5px 1px #000000;
+  width: 8rem;
+  background: #fffff1;
+  border-radius: 5px;
+  box-shadow: 1px 1px 1px 1.25px #fff, 1.5px 1.5px 1px 1.5px #000;
 }
 .main-body .ver-usuarios .usuario div.centrar-usuario i.del-function {
   cursor: pointer;
@@ -88,6 +187,7 @@
 .main-body .ver-usuarios .usuario div.centrar-usuario p {
   text-align: center;
   font-weight: bold;
+  font-size: 17px;
 }
 .main-body .ver-usuarios .usuario div.centrar-usuario p i {
   color: #000;
@@ -118,16 +218,31 @@
   color: green;
   cursor: pointer;
 }
+.main-body .ver-usuarios .usuario div.delete-user {
+  padding: 1px 0;
+}
 .main-body .isercion_usuario {
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  height: 10rem;
-  margin-top: 1rem;
-  padding: 5px;
+  margin-top: 2rem;
+  padding: 5px 2px;
   background-color: #fff;
-  border-radius: 10px;
+  border-radius: 5px;
+}
+.main-body .isercion_usuario h2 {
+  margin: 0.5rem 0;
+  padding: 5px 2px;
+  background: #7d8bde;
+  border-radius: 5px;
+  box-shadow: 1px 1px 1px 1px black;
+}
+.main-body .isercion_usuario .contenedor-insercion {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
 }
 .main-body .isercion_usuario .leyenda-insercion {
   display: flex;
@@ -145,8 +260,8 @@
   margin: 0 0.068rem;
   padding: 5px 0;
   width: 9rem;
-  background: linear-gradient(260deg, rgba(49, 4, 152, 0.7363737731) 17%, rgb(14, 0, 120) 60%);
-  border-radius: 10px;
+  background: linear-gradient(265deg, rgb(164, 164, 255) 3%, rgb(10, 0, 92) 76%);
+  border-radius: 5px;
 }
 .main-body .isercion_usuario .leyenda-insercion .centrar-leyenda p {
   box-shadow: 0.5px 0.5px 0.5px 2px #9FE3F3;
@@ -154,7 +269,7 @@
   text-shadow: 2px 2px 0 #000;
   font-weight: bold;
   padding: 5px;
-  border-radius: 10px;
+  border-radius: 5px;
   text-align: center;
 }
 .main-body .isercion_usuario .datos-insercion {
@@ -172,8 +287,8 @@
   margin: 0 0.068rem;
   padding: 10px;
   width: 9rem;
-  background: linear-gradient(260deg, rgba(49, 4, 152, 0.7363737731) 17%, rgb(14, 0, 120) 60%);
-  border-radius: 10px;
+  background: linear-gradient(265deg, rgb(164, 164, 255) 3%, rgb(10, 0, 92) 76%);
+  border-radius: 5px;
 }
 .main-body .isercion_usuario .datos-insercion .centrar-datos-insercion input {
   margin: 5px;
@@ -183,17 +298,43 @@
   padding-left: 5px;
   font-weight: bold;
   border: none;
-  border-radius: 10px;
+  border-radius: 5px;
   box-shadow: 1px 1px 0.5px 1px #000000;
 }
 .main-body .isercion_usuario button {
   padding: 5px;
   border: none;
-  border-radius: 10px;
+  border-radius: 5px;
   box-shadow: 1px 1px 0.5px 1px #000000;
   cursor: pointer;
   transition: 0.9s;
 }
 .main-body .isercion_usuario button:hover {
   background: #03a6d2;
+}
+
+@media only screen and (max-width: 1048px) {
+  header {
+    z-index: 10;
+  }
+  .main-body .ver-usuarios {
+    width: 85% !important;
+    padding: 0 10px;
+    height: 30rem;
+  }
+  .main-body .ver-usuarios .contendor-terciario-1, .main-body .ver-usuarios .contendor-terciario-2, .main-body .ver-usuarios .contendor-terciario-3 {
+    display: flex !important;
+    flex-wrap: wrap;
+  }
+  .main-body .ver-usuarios .contendor-terciario-1 .leyenda-ancha, .main-body .ver-usuarios .contendor-terciario-1 div.centrar-usuario-ancha, .main-body .ver-usuarios .contendor-terciario-2 .leyenda-ancha, .main-body .ver-usuarios .contendor-terciario-2 div.centrar-usuario-ancha, .main-body .ver-usuarios .contendor-terciario-3 .leyenda-ancha, .main-body .ver-usuarios .contendor-terciario-3 div.centrar-usuario-ancha {
+    width: 17rem !important;
+    font-size: 15px !important;
+  }
+  .main-body .ver-usuarios .contendor-terciario-1 .centrar-leyenda, .main-body .ver-usuarios .contendor-terciario-1 div.centrar-usuario, .main-body .ver-usuarios .contendor-terciario-2 .centrar-leyenda, .main-body .ver-usuarios .contendor-terciario-2 div.centrar-usuario, .main-body .ver-usuarios .contendor-terciario-3 .centrar-leyenda, .main-body .ver-usuarios .contendor-terciario-3 div.centrar-usuario {
+    width: 8.5rem !important;
+    font-size: 15px !important;
+  }
+  .main-body .contenedor-insercion {
+    flex-direction: column !important;
+  }
 }/*# sourceMappingURL=users_admin.css.map */
