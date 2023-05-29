@@ -33,9 +33,6 @@
                         <p> Apellidos</p>
                     </div>
                     <div class="centrar-leyenda">
-                        <p> Nom Chat </p>
-                    </div>
-                    <div class="centrar-leyenda">
                         <p> Email </p>
                     </div>
                     <div class="centrar-leyenda">
@@ -48,49 +45,91 @@
                     <div class="centrar-leyenda">
                         <p> Creado <i class="fa-regular fa-calendar-days"></i></p>
                     </div>
-                    <div class="centrar-leyenda">
+                    <!-- <div class="centrar-leyenda">
                         <p> Vigencia <i class="fa-regular fa-calendar-days"></i> </p>
-                    </div>
+                    </div> -->
                     <div class="centrar-leyenda">
                         <p> EDIT </p>
                     </div>
                     <div class="centrar-leyenda">
                         <p> DEL </p>
                     </div>
-                    <div class="centrar-leyenda">
-                        <p> DELETE </p>
-                    </div>
 
                 </section>
-                <% usuarios.forEach( elemento => { %>
+
+                <% for(let i = 0; i < usuarios.length; i++){ %>
                     <section class="usuario">
-                        <p> <%- elemento.nombre %> </p>
-                        <p> <%- elemento.apellidos %> </p>
-                        <p> <%- elemento.usuario_chat %> </p>
-                        <p> <%- elemento.email %> </p>
-                        <p> <strong> <i class="fa-solid fa-ellipsis"></i> <i class="fa-solid fa-key"></i> </strong> <%#- elemento.contrasenya %> </p>
-                        <p> <%- elemento.permisos %> </p>
-                        <p> <%- elemento.fecha_formateada %> </p>
-                        <p> <%- elemento.vigencia %> </p>
-                        <p class="update-user" onclick=" editar_usuario( `<%- elemento.id_usuario %>` )"> <i class="fa-solid fa-pen-to-square"></i>  </p>
-                        <p class="delete-user"> <i class="fa-solid fa-square-minus"></i> <i class="fa-solid fa-lock"></i> <i class="fa-solid fa-unlock"></i> <i class="fa-solid fa-toggle-off"></i> <i class="fa-solid fa-toggle-off fa-rotate-180"></i> </p>
-                        <p> <input type="checkbox" name="" id="" class="usuario-checked"> </p>
+
+                        <div class="centrar-usuario">
+                            <p> <%- usuarios[i].nombre %> </p>
+                        </div>
+                        
+                        <div class="centrar-usuario">
+                            <p> <%- usuarios[i].apellidos %> </p>
+                        </div>
+
+                        <div class="centrar-usuario">
+                            <p> <%- usuarios[i].email %> </p>
+                        </div>
+
+                        <div class="centrar-usuario">
+                            <p>
+                                <strong>
+                                    <i class="fa-solid fa-ellipsis"></i>
+                                    <i class="fa-solid fa-key"></i>
+                                </strong>
+                                <%#- elemento.contrasenya %>
+                            </p>
+                        </div>
+                        
+                        <div class="centrar-usuario">
+                            <p> <% if( usuarios[i].permisos == 1 ){ %> Admin <% }else{ %> User <% } %> </p>
+                        </div>
+                        
+                        <div class="centrar-usuario">
+                            <p> <%- usuarios[i].fecha_formateada %> </p>
+                        </div>
+                        
+                        <!-- <div class="centrar-usuario">
+                            <p> <%#- usuarios[i].vigencia %> </p>
+                        </div> -->
+                        
+                        <div class="centrar-usuario">
+                            <p class="update-user" onclick=" editar_usuario( `<%= usuarios[i].id_usuario %>` )">
+                                <i class="fa-solid fa-pen-to-square edit"></i>
+                            </p>
+                        </div>
+                        
+                        <div class="centrar-usuario delete-user" >
+                            <i class="fa-solid fa-square-minus del-function del-user<%- i %> disabled" onclick=" borrar_usuario(`<%= usuarios[i].id_usuario %>`)"> </i>
+
+                            <div class="close option-close<%- i %>">
+                                <i class="fa-solid fa-lock close-closed<%- i %>"> </i>
+                                <i class="fa-solid fa-toggle-on fa-rotate-180 close-closed<%- i %> block"></i>
+                            </div>
+                            
+                            <div class="open option-open<%- i %>">
+                                <i class="fa-solid fa-unlock open-opened<%- i %>"> </i>
+                                <i class="fa-solid fa-toggle-on open-opened<%- i %> elim"></i>
+                            </div>
+                        </div>
+
                     </section>
-                <% }); %>
+                <% }; %>
             </div>
 
             <div class="isercion_usuario">
-                <h2>Insert Unser</h2>
+                <h2>Insert User</h2>
+
                 <section class="leyenda-insercion">
+
                     <div class="centrar-leyenda">
                         <p> Nombre </p>
                     </div>
                     <div class="centrar-leyenda">
                         <p> Apellidos</p>
                     </div>
-                    <div class="centrar-leyenda">
-                        <p> Nom Chat </p>
-                    </div>
+                    
                     <div class="centrar-leyenda">
                         <p> Email </p>
                     </div>
@@ -98,40 +137,149 @@
                         <p> Contraseña </p>
                     </div>
                     
-                    <div class="centrar-leyenda">
-                        <p> Permisos </p>
-                    </div>
-                    <div class="centrar-leyenda">
-                        <p> Creacion </p>
-                    </div>
-                    <div class="centrar-leyenda">
-                        <p> Vigencia </p>
-                    </div>
                 </section>
 
                 <section class="datos-insercion">
+                    
+                    <div class="centrar-datos-insercion">
+                        <input type="text" name="nombre" class="nombre" placeholder="Name: ">
+                    </div>
 
-                    <button onclick="add_user()"> <i class="fa-solid fa-play"></i> </button>
+                    <div class="centrar-datos-insercion">
+                        <input type="text" name="apellidos" class="apellidos" placeholder="Last Name: ">
+                    </div>
+
+                    <div class="centrar-datos-insercion">
+                        <input type="text" name="email" class="email" placeholder="Email: ">
+                    </div>
+
+                    <div class="centrar-datos-insercion">
+                        <input type="text" name="password" class="password" placeholder="Password: ">
+                    </div>
                 </section>
+                <button onclick="crear_usuario()"> Create User </button>
             </div>
 
         </section>
 
     </main>
 
-    <script>
-        let ul = document.querySelector('.ul');
-        let logo = document.getElementsByClassName('hamburger')[0];
 
-       logo.addEventListener('click', ( event) => {
-            if( ul.classList.contains('show') ){
-                ul.classList.remove('show');
-            }else{
-                ul.classList.add('show');
-            }
 
-        });
+    <script class=".no-seleccionable">
+        //document.addEventListener('DOMContentLoaded', function() {
+            //hamburger
+            let ul = document.querySelector('.ul');
+            let logo = document.getElementsByClassName('hamburger')[0];
 
+            logo.addEventListener('click', ( event) => {
+                    if( ul.classList.contains('show') ){
+                        ul.classList.remove('show');
+                    }else{
+                        ul.classList.add('show');
+                    }
+
+                });
+
+            //Insert user
+            function crear_usuario(){
+                let nombre = document.querySelector('.nombre');
+                let apellidos = document.querySelector('.apellidos');
+                let email = document.querySelector('.email');
+                let password = document.querySelector('.password');
+
+                let options = {
+                    method: 'POST',
+                    headers: {
+                      'Content-Type': 'application/json' // Especifica el tipo de contenido del cuerpo de la petición
+                    },
+                    body: JSON.stringify({ // Convierte los datos a enviar en formato JSON
+                      key1: nombre.value,
+                      key2: apellidos.value,
+                      key3: email.value,
+                      key4: password.value,
+                    })
+                };
+
+                fetch('http://localhost:3000/insert_user', options)
+                .then( response => response.json()
+                    .then( data => {
+                        window.location.href = "http://localhost:3000/admin";
+                    })
+                );
+          };
+
+           // Update_User
+           function editar_usuario(id){
+            console.log( id );
+           }
+
+
+           // Delete User
+           let delete_user = document.querySelectorAll('.delete-user');
+
+           let close_closed;
+           let open_opened;
+
+           let option_open;
+           let option_close;
+
+           let del_user;
+
+           for( let i = 0; i < delete_user.length; i++){
+
+                close_closed = document.querySelectorAll(`.close-closed${i}`);
+                open_opened = document.querySelectorAll(`.open-opened${i}`);
+
+                close_closed.forEach( elem => {
+                    elem.addEventListener('click', () => {
+                        option_open = document.querySelector(`.option-open${i}`);
+                        option_close = document.querySelector(`.option-close${i}`);
+                        del_user = document.querySelector(`.del-user${i}`);
+                        
+                        del_user.classList.remove('disabled');
+                        option_open.style.display = "flex";
+                        option_close.style.display = "none";
+                    });
+                });
+
+                open_opened.forEach( elem => {
+                    elem.addEventListener('click', () => {
+                        option_close = document.querySelector(`.option-close${i}`);
+                        option_open = document.querySelector(`.option-open${i}`);
+                        del_user = document.querySelector(`.del-user${i}`);
+
+                        del_user.classList.add('disabled'); //Crea una inpresion de dshabilitado
+                        option_close.style.display = "flex";  
+                        option_open.style.display = "none";
+                    });
+                });
+           }
+           
+           function borrar_usuario(x){
+                //console.log(x);
+                
+                let options = {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json' // Especifica el tipo de contenido del cuerpo de la petición
+                    },
+                    body: JSON.stringify({ // Convierte los datos a enviar en formato JSON
+                        user: x,
+                    })
+                };
+                fetch('http://localhost:3000/del_user', options)
+                .then( response => response.json()
+                    .then( data => {
+                        window.location.href = "http://localhost:3000/admin";
+                    })
+                );
+                
+           }
+
+           
+        //});
+          
     </script>
 
 </body>

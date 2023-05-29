@@ -3,7 +3,7 @@ const { pool } = require("../../database/connection");
  
  // FUNCIÓN para buscar todos los usuarios
  async function todos_los_usuarios(pool){
-        const [ users ] = await pool.query('SELECT nombre, apellidos, usuario_chat, email, contrasenya, permisos, DATE_FORMAT(fecha_creacion, "%Y-%m-%d") AS fecha_formateada, vigencia FROM usuarios;');
+        const [ users ] = await pool.query('SELECT id_usuario, nombre, apellidos, usuario_chat, email, contrasenya, permisos, DATE_FORMAT(fecha_creacion, "%Y-%m-%d") AS fecha_formateada, vigencia FROM usuarios;');
         return users;
 }
 
@@ -76,6 +76,11 @@ async function registrar_usuario(pool, nombre, apellido, correo, contraseña, pe
     values ( null, ?, ?, ?, ?, ?, ?, ?, null);`,[ String(nombre), String(apellido), String(nombre), String(correo), String(contraseña), permiso, String(hora_actual) ]);
 }
 
+// FUNCIÓN asyncrona para borrar un usuario
+async function del_user(pool, id){
+    const [ del ] = await pool.query(`DELETE FROM usuarios WHERE id_usuario = ?;`, [id]);
+}
+
 
 module.exports = {
     todos_los_usuarios,
@@ -84,4 +89,5 @@ module.exports = {
     buscar_email,
     nom_permiso_usuario,
     registrar_usuario,
+    del_user,
 }

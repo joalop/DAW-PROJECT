@@ -11,4 +11,15 @@ function have_session(req, res, next){
   }
 }
 
-module.exports = { have_session, };
+function is_admin(req, res, next){
+
+  if (req.session.permiso_id == 1) { //Comprueba si el usuario es admin
+    // El usuario es admin
+    next();
+  } else {
+    // El usuario no es admin
+    res.render('templates/dashboard.ejs', {comments: `If you want to log in, you need Admin Access`, respuesta_usuario_login: "",});
+  }
+}
+
+module.exports = { have_session, is_admin };

@@ -11,13 +11,13 @@ let comments = "";
 const pool = require('../database/connection')
 // ----------------------
 // FUNCIONES DB
-const { todos_los_usuarios, saca_data_user, buscar_usuario, buscar_email, nom_permiso_usuario, registrar_usuario, } = require('./functions/functionsdb');
+const { todos_los_usuarios, saca_data_user, buscar_usuario, buscar_email, nom_permiso_usuario, registrar_usuario, del_user, } = require('./functions/functionsdb');
 // ----------------------
 // FUNCIONES DB
 const { validaciones_correo } = require('./functions/validaciones');
 // ----------------------
 // FUNCIONES MIDDLEWARE
-const { have_session } = require('./middleware/session');
+const { have_session, is_admin, } = require('./middleware/session');
 
 // GET '/' INDEX
 router.get('/', (req, res, next) => {
@@ -160,19 +160,21 @@ router.post('/register', (req, res, next) => {
 
 // GET DASHBOARD
 router.get('/dashboard', have_session, (req, res, next) => {
+    let comments = "";
     res.render( 'templates/dashboard.ejs', {
         user_name: req.session.nombre,
         user_email: req.session.email,
         user_permision: req.session.permiso_name,
+        comments,
     });
 });
 
 // GET ADMIN
-router.get('/admin', have_session, (req, res, next) => {
+router.get('/admin', have_session, is_admin, (req, res, next) => {
     try{
         todos_los_usuarios(pool)
         .then( response2 => {
-                //console.log(response2);
+                // console.log(response2);
 
                 res.render('templates/private/admin.ejs', {
                     user_name: req.session.nombre,
@@ -189,7 +191,7 @@ router.get('/admin', have_session, (req, res, next) => {
 });
 
 // GET LOGOUT
-router.get('/logout', have_session, (req, res) => {
+router.get('/logout', have_session, (req, res ) => {
     req.session.destroy((err) => {
       if (err) {
         console.log('Error al destruir la sesión:', err);
@@ -199,6 +201,42 @@ router.get('/logout', have_session, (req, res) => {
     });
   });
 
+  // - - - - - - - - - - - - - 
+  // GET /INSERT_USER
+
+router.post('/insert_user', have_session, is_admin, (req, res ) => {
+    //console.log( req.body );
+
+    //encriptar contraseña
+    bcryp.hash( req.body.key4, 10, (error, hash ) => {
+        try{
+            registrar_usuario( pool, nombre = req.body.key1, apellido = req.body.key2, correo = req.body.key3, hash, permiso = 2)
+            .then(
+                res.json(req.body)
+            )
+            .catch( error => {
+                console.log( error );
+                res.json(req.body);
+            });
+
+        }catch( error){
+            console.log( error );
+        }
+    });
+});
+
+// GET DELETE_USER
+router.post('/del_user', have_session, is_admin, ( req, res ) => {
+    //console.log( req.body );
+    del_user(pool,req.body.user).then(
+        res.json( req.body )
+    )
+    .catch( error => {
+        console.log( error );
+        res.json( req.body );
+    });
+    
+});
 
 // -----------------------------
 // ------- OTHERS ROUTES -------

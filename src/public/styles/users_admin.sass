@@ -11,8 +11,13 @@
     align-items: center
 
     .ver-usuarios
-        height: 25rem
-        padding: 5px
+        margin: 0
+        height: 20rem
+        padding-top: 5px
+        padding-bottom: 5px
+        padding-left: 5px
+        padding-right: 0
+
         background-color: #fff
         border-radius: 10px
 
@@ -23,16 +28,20 @@
         .leyenda-usuarios
             display: flex
             flex-direction: row
+            margin: 0
 
             .centrar-leyenda
                 display: flex
                 flex-direction: column
                 justify-content: center
                 align-items: center
-                align-content: center
 
-                margin: 0 0.068rem
-                padding: 5px 0
+                
+                margin-left: 0.40rem
+                padding-top: 5px
+                padding-bottom: 5px
+                padding-left: 5px
+                padding-right: 0
 
                 width: 8.6rem
                 background: linear-gradient(260deg, rgba(49,4,152,0.7363737731420693) 17%, rgba(14,0,120,1) 60%)
@@ -40,12 +49,16 @@
                 border-radius: 10px
                 
                 p
-                    box-shadow: 1px 1px 0.5px 2px #9FE3F3
+                    box-shadow: 0.5px 0.5px 0.5px 2px #9FE3F3
                     color: #fff
                     text-shadow: 2px 2px 0 #000
                     font-weight: bold
 
-                    padding: 5px
+                    padding-top: 5px
+                    padding-bottom: 5px
+                    padding-left: 5px
+                    padding-right: 5px
+                    
                     border-radius: 10px
                     text-align: center
     
@@ -56,32 +69,80 @@
 
             margin: 0.25rem 0
 
-            width: 98%
+            div.centrar-usuario
+                display: flex
+                flex-direction: row
+                justify-content: center
+                align-items: center
 
-            
-            p
                 margin: 0 0.15rem
-
                 width: 8.6rem
 
                 border-radius: 10px
                 box-shadow: 1px 1px 0.5px 1px #000000
-    
-                text-align: center
-                font-weight: bold
+                i.del-function
+                    cursor: pointer
+                i.edit
+                    cursor: pointer
+                i.delete
+                    cursor: pointer
+                i
+                    color: #982704
+                i.disabled
+                    /* Estilos para el icono desactivado */
+                    color: #5a5452
+                    opacity: 0.5
+                    pointer-events: none// Desactivar eventos de clic
+                
+                p
+                    text-align: center
+                    font-weight: bold
+                    i
+                        color: #000
 
+                div.close
+                    display: flex
+                    flex-direction: row
+                    margin-left: 1rem
+                    i
+                        color: #000
+                        cursor: pointer
+                    i.block
+                        color: #982704
+                        cursor: pointer
+                div.open
+                    display: none
+                    flex-direction: row
+                    margin-left: 1rem
+                    i
+                        color: #000
+                        cursor: pointer
+                    i.elim
+                        color: green
+                        cursor: pointer
     .isercion_usuario
         display: flex
         flex-direction: column
         justify-content: center
         align-items: center
 
-        height: 15rem
+        height: 10rem
+        margin-top: 1rem
         padding: 5px
         background-color: #fff
         border-radius: 10px
 
+        h2
+
         .leyenda-insercion
+            display: flex
+            flex-direction: row
+            justify-content: center
+            align-items: center
+            width: 100%
+
+            margin-bottom: 0.5rem
+
             .centrar-leyenda
                 display: flex
                 flex-direction: row
@@ -91,12 +152,12 @@
                 margin: 0 0.068rem
                 padding: 5px 0
 
-                width: 8.6rem
+                width: 9rem
                 background: linear-gradient(260deg, rgba(49,4,152,0.7363737731420693) 17%, rgba(14,0,120,1) 60%)
                 
                 border-radius: 10px
                 p
-                                        box-shadow: 1px 1px 0.5px 2px #9FE3F3
+                    box-shadow: 0.5px 0.5px 0.5px 2px #9FE3F3
                     color: #fff
                     text-shadow: 2px 2px 0 #000
                     font-weight: bold
@@ -107,8 +168,52 @@
                     
 
         .datos-insercion
+            display: flex
+            flex-direction: row
+            justify-content: start
+            align-items: start
+            width: 100%
 
-            button
+            .centrar-datos-insercion
+                display: flex
+                flex-direction: column
+                justify-content: center
+                align-items: center
+
+                margin: 0 0.068rem
+                padding: 10px
+
+                width: 9rem
+                background: linear-gradient(260deg, rgba(49,4,152,0.7363737731420693) 17%, rgba(14,0,120,1) 60%)
+                
+                border-radius: 10px
+
+                input
+
+                    margin: 5px
+                    width: 8rem
+
+                    padding-top: 5px
+                    padding-bottom: 5px
+                    padding-left: 5px
+
+                    font-weight: bold
+
+                    border: none
+                    border-radius: 10px
+                    box-shadow: 1px 1px 0.5px 1px #000000
+
+        button
+            padding: 5px
+
+            border: none
+            border-radius: 10px
+            box-shadow: 1px 1px 0.5px 1px #000000
+            cursor: pointer
+
+            transition: 0.9s
+            &:hover
+                background: #03a6d2
 
 
 
