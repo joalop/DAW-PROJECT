@@ -102,6 +102,11 @@ app.get('/mysql', (req, res, next) => {
    res.redirect('/')
 });
 
+// Configuración de la ruta 404
+app.use( (req, res, next) => {
+   res.status(404).render('templates/not-found.ejs')
+ });
+
 
 // Listen Server
 app.listen( app.get('port'), () => {

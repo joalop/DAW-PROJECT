@@ -18,7 +18,7 @@ function is_admin(req, res, next){
     next();
   } else {
     // El usuario no es admin
-    res.render('templates/dashboard.ejs', {comments: `If you want to log in, you need Admin Access`, respuesta_usuario_login: "",});
+    res.render('templates/dashboard.ejs', { comments: `If you want to log in, you need Admin Access`, respuesta_usuario_login: "",});
   }
 }
 

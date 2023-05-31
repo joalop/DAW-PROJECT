@@ -14,7 +14,13 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 <%# --------------------------------------------- %>
 
+<%# GENERAL STYLES %>
+<link rel="stylesheet" href="/styles/general.css">
+
+<%# NAV MENU STYLES %>
 <link rel="stylesheet" href="/styles/nav_menu.css">
+
+<%# ADMIN STYLES %>
 <link rel="stylesheet" href="/styles/users_admin.css">
 
 <%- include('../../components/head-bottom.ejs') %>
@@ -31,7 +37,7 @@
                             <div class="subcontenedor-terciario-1">
                                 <section class="leyenda-usuarios">
                                     <div class="leyenda-ancha">
-                                        <p> Nombre </p>
+                                        <p> NAME </p>
                                     </div>
                                 </section>
                                 <section class="usuario">
@@ -44,7 +50,7 @@
                             <div class="subcontenedor-terciario-2">
                                 <section class="leyenda-usuarios">
                                     <div class="centrar-leyenda">
-                                        <p> Apellidos</p>
+                                        <p> LAST NAME</p>
                                     </div>
                                 </section>
                                 <section class="usuario">
@@ -57,7 +63,7 @@
                             <div class="subcontenedor-terciario-3">
                                 <section class="leyenda-usuarios">
                                     <div class="centrar-leyenda">
-                                        <p> Contraseña </p>
+                                        <p> PASSWORD </p>
                                     </div>
                                 </section>
                                 <section class="usuario">
@@ -78,7 +84,7 @@
                             <div class="subcontenedor-terciario-1">
                                 <section class="leyenda-usuarios">
                                     <div class="leyenda-ancha">
-                                        <p> Email </p>
+                                        <p> EMAIL </p>
                                     </div>
                                 </section>
                                 <section class="usuario">
@@ -91,7 +97,7 @@
                             <div class="subcontenedor-terciario-2">
                                 <section class="leyenda-usuarios">
                                     <div class="centrar-leyenda">
-                                        <p> Creado <i class="fa-regular fa-calendar-days"></i></p>
+                                        <p> CREATE <i class="fa-regular fa-calendar-days"></i></p>
                                     </div>
                                 </section>
                                 <section class="usuario">
@@ -104,12 +110,12 @@
                             <div class="subcontenedor-terciario-3">
                                 <section class="leyenda-usuarios">
                                     <div class="centrar-leyenda">
-                                        <p> Vigencia <i class="fa-regular fa-calendar-days"></i> </p>
+                                        <p> VALIDITY <i class="fa-regular fa-calendar-days"></i> </p>
                                     </div>
                                 </section>
                                 <section class="usuario">
                                     <div class="centrar-usuario">
-                                        <p> <%- usuarios[i].vigencia %> </p>
+                                        <p> <%- usuarios[i].vigencia_formateada %> </p>
                                     </div>
                                 </section>
                             </div>
@@ -119,7 +125,7 @@
                             <div class="subcontenedor-terciario-1">
                                 <section class="leyenda-usuarios">
                                     <div class="leyenda-ancha">
-                                        <p> Permisos </p>
+                                        <p> PERMISSIONS </p>
                                     </div>
                                 </section>
                                 <section class="usuario">
@@ -137,8 +143,9 @@
                                 </section>
                                 <section class="usuario">
                                     <div class="centrar-usuario">
-                                        <p class="update-user" onclick=" editar_usuario( `<%= usuarios[i].id_usuario %>` )">
-                                            <i class="fa-solid fa-pen-to-square edit"></i>
+                                        <form action="/edit_user" method="post" ></form>
+                                        <p class="update-user">
+                                            <i class="fa-solid fa-pen-to-square edit" onclick=" editar_usuario( `<%= usuarios[i].id_usuario %>` )"></i>
                                         </p>
                                     </div>
                                 </section>
@@ -147,7 +154,7 @@
                             <div class="subcontenedor-terciario-3">
                                 <section class="leyenda-usuarios">
                                     <div class="centrar-leyenda">
-                                        <p> DEL </p>
+                                        <p> DELETE </p>
                                     </div>
                                 </section>
                                 <section class="usuario">
@@ -229,7 +236,7 @@
                     </div>
 
                 </div>
-                
+
                 <button onclick="crear_usuario()"> Create User </button>
             </div>
         </section>
@@ -237,7 +244,7 @@
 
     <script class=".no-seleccionable">
         //document.addEventListener('DOMContentLoaded', function() {
-            //hamburger
+            // hamburger
             let ul = document.querySelector('.ul');
             let logo = document.getElementsByClassName('hamburger')[0];
 
@@ -247,8 +254,7 @@
                     }else{
                         ul.classList.add('show');
                     }
-
-                });
+            });
 
             //Insert user
             function crear_usuario(){
@@ -280,9 +286,27 @@
 
            // Update_User
            function editar_usuario(id){
-            console.log( id );
-           }
+            // console.log( id );
+                let dato = id; // dato ha enviar por POST
+                
+                // Creando formulario
+                let form = document.createElement("form");
+                form.method = "post";
+                form.action = "/edit_user";
+                
+                let input = document.createElement("input");
+                input.type = "hidden";
+                input.name = "user_id";
+                input.value = dato;
+                
+                form.appendChild(input);
 
+                // Agregar formulario al documento
+                document.body.appendChild(form);
+                
+                // Enviar el formulario automáticamente
+                form.submit();
+           };
 
            // Delete User
            let delete_user = document.querySelectorAll('.delete-user');

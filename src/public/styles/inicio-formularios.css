@@ -22,10 +22,11 @@ body main .seccion-centrada {
   padding-top: 6rem;
 }
 body main .seccion-centrada .principal {
+  margin-bottom: 1rem;
   width: -moz-fit-content;
   width: fit-content;
   background-color: white;
-  padding: 30px;
+  padding: 10px;
   border-radius: 20px;
 }
 body main .seccion-centrada .principal h2 {
@@ -83,6 +84,9 @@ body main .seccion-centrada .principal #formulario .zone_mail_login .email_login
 }
 body main .seccion-centrada .principal #formulario .zone_mail_login .eye_password-open, body main .seccion-centrada .principal #formulario .zone_eye_password .eye_password-open, body main .seccion-centrada .principal #formulario .button-submit .eye_password-open {
   display: none;
+}
+body main .seccion-centrada .principal .sign-up {
+  font-weight: bold;
 }
 body main .seccion-centrada .reaccion {
   margin-top: 1rem;

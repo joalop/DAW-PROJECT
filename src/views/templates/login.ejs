@@ -14,11 +14,14 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 <%# --------------------------------------------- %>
 
-<%# INICIAL STYLES %>
-<%- include('../modules/link-inicial/inicial-styles.ejs') %>
+<%# GENERAL STYLES %>
+<link rel="stylesheet" href="/styles/general.css">
 
-<%# STYLES NAV %>
-<%- include('../modules/link-nav-style/nav-styles.ejs') %>
+<%# INICIAL STYLES %>
+<link rel="stylesheet" href="/styles/inicial.css">
+
+<%# STYLES NAV INICIO %>
+<link rel="stylesheet" href="/styles/nav-inicio.css">
 
 <%# Formulario STYLES %>
 <link rel="stylesheet" href="/styles/inicio-formularios.css">
@@ -61,7 +64,7 @@
                     </div>
 
                 </form>
-                <div class="sign-up">Don't have an account, you can <a href="/register"> SIGN UP </a></div>
+                <div class="sign-up">Don't have an account, <br> you can <a href="/register"> SIGN UP </a></div>
             </section>
             <section class="pruebas">
                 <% if( respuesta_usuario_login != "" ){ %>
@@ -82,6 +85,7 @@
 </main>
 
 <script>
+    // Hamburguer
     let ul = document.querySelector('.ul');
     let logo = document.getElementsByClassName('hamburger')[0];
 

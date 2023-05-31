@@ -14,43 +14,88 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 <%# --------------------------------------------- %>
 
+<%# GENERAL STYLES %>
+<link rel="stylesheet" href="/styles/general.css">
+
+<%# NAV MENU STYLES %>
 <link rel="stylesheet" href="/styles/nav_menu.css">
 
-</head>
-<body>
+<%# DASHBOARD STYLES %>
+<link rel="stylesheet" href="/styles/dashboard-styles.css">
+
+<%- include('../components/head-bottom.ejs') %>
     <main>
         <%- include("../components/nav/nav_menu.ejs") %>
         
-        <h2>Hola mundo</h2>
+        <h2>Hola mundo <%- id_user %> </h2>
 
         <div id="dasboard-body">
             <div class="grupos container">
-                <i class="fa-solid fa-user-group"></i> <i class="fa-solid fa-plus"></i>  <i class="fa-solid fa-ban"> </i><i class="fa-solid fa-diagram-project"></i> <i class="fa-solid fa-circle-half-stroke"></i>
-            </div>
-            <div class="nota container">
-                <i class="fa-solid fa-plus"></i>  <i class="fa-solid fa-note-sticky"></i> <i class="fa-solid fa-square-minus"></i>
-            </div>
-            <div class="imagenes container">
-                <i class="fa-solid fa-plus"></i> <i class="fa-solid fa-cloud"></i> <i class="fa-regular fa-image"></i>
+                <i class="fa-solid fa-user-group"> </i> <i class="fa-solid fa-plus"> </i>  <i class="fa-solid fa-ban"> </i> <i class="fa-solid fa-diagram-project"> </i> <i class="fa-solid fa-circle-half-stroke"> </i>
             </div>
 
-            <div class="test-lab container"> <i class="fa-solid fa-flask-vial"></i> </div>
+            <div class="nota container">
+                <i class="fa-solid fa-plus"></i>  <i class="fa-solid fa-note-sticky"> </i> <i class="fa-solid fa-square-minus"> </i>
+            </div>
+
+            <div class="imagenes container">
+                <i class="fa-solid fa-plus"> </i> <i class="fa-solid fa-cloud"> </i> <i class="fa-regular fa-image"> </i>
+            </div>
+
+            <div class="test-lab container">
+                <i class="fa-solid fa-flask-vial"> </i>
+            </div>
+
+            <div class="user-profile container" onclick=" editar_user( 15 ) ">
+                <i class="fa-solid fa-address-card user-identifier"> </i>
+            </div>
 
         </div>
     </main>
-
+<script> console.log(`<%- id_user %>`); </script>
     <script>
+        
+
         let ul = document.querySelector('.ul');
         let logo = document.getElementsByClassName('hamburger')[0];
-
-       logo.addEventListener('click', ( event) => {
-            if( ul.classList.contains('show') ){
-                ul.classList.remove('show');
-            }else{
-                ul.classList.add('show');
-            }
+        // hamburguer
+        logo.addEventListener('click', ( event) => {
+                if( ul.classList.contains('show') ){
+                    ul.classList.remove('show');
+                }else{
+                    ul.classList.add('show');
+                }
 
         });
+
+        //USER PROFILE
+        let user_profile = document.querySelector('.user-profile');
+        console.log( user_profile );
+
+        function editar_user( identificador ){
+             
+            let dato = parseInt( identificador ); // dato ha enviar por POST
+
+            // Creando formulario
+            let form = document.createElement("form");
+            form.method = "post";
+            form.action = "/edit_user";
+            
+            let input = document.createElement("input");
+            input.type = "hidden";
+            input.name = "user_id";
+            input.value = dato;
+            
+            form.appendChild(input);
+
+            // Agregar formulario al documento
+            document.body.appendChild(form);
+            
+            // Enviar el formulario automáticamente
+            form.submit();
+        
+        };
+        
 
     </script>
 

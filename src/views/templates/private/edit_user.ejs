@@ -1,12 +1,193 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-</head>
-<body>
-    
+<%# HEAD TOP 1/2 %>
+<%- include('../../components/head-top.ejs') %>
+
+<%# --------------------------------------------- %>
+<%# GENERAL STYLES %>
+<link rel="stylesheet" href="/styles/uiniversal-general-styles.css">
+
+<!-- FONTS -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300&display=swap" rel="stylesheet">
+
+<!-- ICONS -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+<%# --------------------------------------------- %>
+
+<link rel="stylesheet" href="/styles/nav_menu.css">
+<link rel="stylesheet" href="/styles/estilos-edit-user.css">
+<style>
+
+
+</style>
+
+<%- include('../../components/head-bottom.ejs') %>
+    <main>
+        <%- include("../../components/nav/nav_menu.ejs") %>
+        <section class="main-body">
+            <div class="edit-data">
+                <h2> <%= user_permision %> <%= passwd %> </h2>
+
+                <div class="contenedor-editar">
+
+                    <div class="contenedor-logo-editar">
+                        <div class="logo-editar"> <i class="fa-solid fa-circle-user"></i> </div>
+                    </div>
+
+                    <div class="contenedor-nombre">
+                        <div class="nombre-editar">
+                            <label for="nombre">Name</label>
+                            <input type="text" name="nombre" id="nombre" value="<%- user_data[0].nombre %>">
+                        </div>
+                    </div>
+
+                    <div class="contenedor-apellidos">
+                        <div class="apellidos-editar">
+                            <label for="apellidos">Last Name</label>
+                            <input type="text" name="apellidos" id="apellidos" value="<%- user_data[0].apellidos %>">
+                        </div>
+                    </div>
+
+                    <div class="contenedor-usuario_chat">
+                        <div class="usuario_chat-editar">
+                            <label for="usuario_chat">User Chat</label>
+                            <input type="text" name="usuario_chat" id="usuario_chat" value="<%- user_data[0].usuario_chat %>">
+                        </div>
+                    </div>
+
+                    <div class="contenedor-contrasenya">
+                        <div class="contrasenya-editar">
+                            <label for="contrasenya"> New Password </label>
+                            <input
+                            type="text"
+                            name="contrasenya"
+                            id="contrasenya"
+                            value=""
+                            >
+                            <%#- passwd %> <%#- user_data[0].contrasenya%>
+                        </div>
+                    </div>
+
+                    <div class="contenedor-email">
+                        <div class="email-editar">
+                            <label for="email">Email</label>
+                            <input type="text" name="email" id="email" value="<%- user_data[0].email %>">
+                        </div>
+                    </div>
+                    <% if(  user_permision == 'ADMINISTRATOR'){ %>  
+                        <div class="contenedor-fecha-vigencia">
+                            <div class="fecha-vigencia-editar">
+                                <label for="vigencia">Validity</label>
+                                <input type="date" name="vigencia" id="vigencia">
+                            </div>
+                        </div>
+                    <% } %>
+                    <% if(  user_permision == 'ADMINISTRATOR'){ %> 
+                    <div class="contenedor-permiso">
+                        <div class="permiso-editar">
+                            <label for="permiso">Permissions</label>
+                            <select name="permiso" id="permiso">
+                                <option value="1" <% if(user_data[0].permisos == 1){ %> selected <% } %> > Admin </option>
+                                <option value="2" <% if(user_data[0].permisos == 2){ %> selected <% } %> > User </option>
+                            </select>
+                        </div>
+                    </div>
+                    <% } %>
+                    <button onclick="change_data(`<%- user_data[0].id_usuario %>`)"> CHANGUE DATA </button>
+                </div>
+            </div>
+        </section>
+    </main>
+    <script>
+        // hamburger
+        let ul = document.querySelector('.ul');
+            let logo = document.getElementsByClassName('hamburger')[0];
+
+            logo.addEventListener('click', ( event) => {
+                    if( ul.classList.contains('show') ){
+                        ul.classList.remove('show');
+                    }else{
+                        ul.classList.add('show');
+                    }
+            });
+
+            //CHANGE DATA
+            function change_data(){
+
+                if( `<%- user_permision %>` == 'ADMINISTRATOR'  ){
+                    let nombre = document.querySelector('#nombre');
+                    let apellidos = document.querySelector('#apellidos');
+                    let usuario_chat = document.querySelector('#usuario_chat');
+                    let contrasenya = document.querySelector('#contrasenya');
+                    let email = document.querySelector('#email');
+                    let vigencia = document.querySelector('#vigencia');
+                    let permiso = document.querySelector('#permiso');
+
+                    console.log( 'Nombre: ', nombre.value, ); console.log( 'Apellidos: ', apellidos.value, ); console.log( 'usuario Chat: ', usuario_chat.value, );
+                    
+                    console.log( 'Contraseña: ', contrasenya.value, ); console.log( 'Email: ', email.value, ); console.log( 'Vigencia: ', vigencia.value, );
+                    
+                    console.log( 'Permisos: ', permiso.value );
+
+                    let options = {
+                        method: 'POST',
+                        headers: {
+                        'Content-Type': 'application/json' // Especifica el tipo de contenido del cuerpo de la petición
+                        },
+                        body: JSON.stringify({ // Convierte los datos a enviar en formato JSON
+                        id: `<%- user_data[0].id_usuario %>`,
+                        nom: nombre.value,
+                        ape: apellidos.value,
+                        usu_chat: usuario_chat.value,
+                        contra: contrasenya.value,
+                        correo: email.value,
+                        validez: vigencia.value,
+                        perm: permiso.value,
+                        })
+                    };
+                    fetch('http://localhost:3000/user_change_data', options)
+                    .then( response => response.json()
+                        .then( data => {
+                            //console.log( data);
+                                window.location.href = "http://localhost:3000/admin";
+                        })
+                    );
+
+                } else {
+                    let nombre = document.querySelector('#nombre');
+                    let apellidos = document.querySelector('#apellidos');
+                    let usuario_chat = document.querySelector('#usuario_chat');
+                    let contrasenya = document.querySelector('#contrasenya');
+                    let email = document.querySelector('#email');
+
+                    console.log( 'Nombre: ', nombre.value, ); console.log( 'Apellidos: ', apellidos.value, ); console.log( 'usuario Chat: ', usuario_chat.value, );
+                    
+                    console.log( 'Contraseña: ', contrasenya.value, ); console.log( 'Email: ', email.value, );
+                    let options = {
+                        method: 'POST',
+                        headers: {
+                        'Content-Type': 'application/json' // Especifica el tipo de contenido del cuerpo de la petición
+                        },
+                        body: JSON.stringify({ // Convierte los datos a enviar en formato JSON
+                        id: `<%- user_data[0].id_usuario %>`,
+                        nom: nombre.value,
+                        ape: apellidos.value,
+                        usu_chat: usuario_chat.value,
+                        contra: contrasenya.value,
+                        correo: email.value,
+                        perm: 2,
+                        })
+                    };
+                    fetch('http://localhost:3000/user_change_data', options)
+                    .then( response => response.json()
+                        .then( data => {
+                            //console.log( data);
+                                window.location.href = "http://localhost:3000/dashboard";
+                        })
+                    );
+                };
+            };
+
+    </script>
 </body>
 </html>

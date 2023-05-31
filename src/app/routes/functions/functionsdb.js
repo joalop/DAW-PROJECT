@@ -3,13 +3,19 @@ const { pool } = require("../../database/connection");
  
  // FUNCIÓN para buscar todos los usuarios
  async function todos_los_usuarios(pool){
-        const [ users ] = await pool.query('SELECT id_usuario, nombre, apellidos, usuario_chat, email, contrasenya, permisos, DATE_FORMAT(fecha_creacion, "%Y-%m-%d") AS fecha_formateada, vigencia FROM usuarios;');
+        const [ users ] = await pool.query('SELECT id_usuario, nombre, apellidos, usuario_chat, email, contrasenya, permisos, DATE_FORMAT(fecha_creacion, "%Y-%m-%d") AS fecha_formateada, DATE_FORMAT(vigencia, "%Y-%m-%d") AS vigencia_formateada FROM usuarios;');
         return users;
 }
 
- // FUNCIÓN para Devolver datos de un Usuario
+ // FUNCIÓN para Devolver datos de un Usuario por el email
  async function saca_data_user(pool, email){
     const [ users ] = await pool.query('SELECT * FROM usuarios WHERE email = ? ',[ email ]);
+    return users;
+}
+
+ // FUNCIÓN para Devolver datos de un Usuario por la id
+ async function saca_data_user_id(pool, id){
+    const [ users ] = await pool.query('SELECT * FROM usuarios WHERE id_usuario = ?; ',[ id ]);
     return users;
 }
 
@@ -71,7 +77,7 @@ function hora_actual_formato_americano(){
 }
 
 // FUNCIÓN asyncrona para registra un usuario en la base de datos
-async function registrar_usuario(pool, nombre, apellido, correo, contraseña, permiso, hora_actual = hora_actual_formato_americano()){
+async function registrar_usuario( pool, nombre, apellido, correo, contraseña, permiso, hora_actual = hora_actual_formato_americano()){
     const [ new_users ] = await pool.query(`insert into usuarios ( id_usuario, nombre, apellidos, usuario_chat, email, contrasenya, permisos, fecha_creacion, vigencia )
     values ( null, ?, ?, ?, ?, ?, ?, ?, null);`,[ String(nombre), String(apellido), String(nombre), String(correo), String(contraseña), permiso, String(hora_actual) ]);
 }
@@ -81,13 +87,20 @@ async function del_user(pool, id){
     const [ del ] = await pool.query(`DELETE FROM usuarios WHERE id_usuario = ?;`, [id]);
 }
 
+// FUNCIÓN para Actualizar un usuario "ADMIN"
+async function update_user( pool, sql, array_user ){
+    const [ new_data ] = await pool.query( sql, array_user );
+}
+
 
 module.exports = {
     todos_los_usuarios,
     saca_data_user,
+    saca_data_user_id,
     buscar_usuario,
     buscar_email,
     nom_permiso_usuario,
     registrar_usuario,
     del_user,
+    update_user,
 }

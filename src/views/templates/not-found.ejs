@@ -24,70 +24,46 @@
 <link rel="stylesheet" href="/styles/nav-inicio.css">
 
 <style>
-
-    footer {
-
-        width: 100%;
-
+    .main-body{
         display: flex;
-        flex-direction: row;
-        justify-content: space-between;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
     }
-
-    footer div{
-        display: flex;
-        flex-direction: row;
-        justify-content: space-between;
-    }
-
-    footer div ul{
-        list-style-type: none;
-
-        display: flex;
-        flex-direction: row;
-        justify-content: space-between;
-    }
-
-    footer div ul li{
-        margin: 0 0.25rem;
-        width: 3rem;
-        padding: 5px;
-        border: 0.01px solid black;
-        border-radius: 10px;
+    .main-body img {
+        width: 70%;
     }
 </style>
 
 <%# HEAD BOTTOM "2/2 %>
 <%- include('../components/head-bottom.ejs') %>
-
     <main>
-
-        <%# HEADER + NAV COMPONENT %>
+        <%# Header + Nav Component %>
         <%- include('../components/nav/nav_inicio.ejs') %>
-        
+
         <section class="main-body">
-            <h2>Inicio</h2>
+            <h1> <b> Syntax Error 404 </b>  </h1>
+            <h2> <big> <b> Web Direction Not Found </b> </big> </h2>
+    
+            <img src="https://voidcoders.com/wp-content/uploads/2018/09/featured-404-error-image.png" alt="">
         </section>
+    </main>
 
-        <%# FOOTER COMPONENT %>
-        <%- include('../components/footer/footer.ejs') %>
-
-        <script>
+    <script>
+            // Hamburguer
             let ul = document.querySelector('.ul');
             let logo = document.getElementsByClassName('hamburger')[0];
-    
-           logo.addEventListener('click', ( event) => {
+
+        logo.addEventListener('click', ( event) => {
                 if( ul.classList.contains('show') ){
                     ul.classList.remove('show');
                 }else{
                     ul.classList.add('show');
                 }
-    
+
             });
+
+    </script>
     
-        </script>
-
-    </main>
-
-<%# FOOTER BOTTOM %>
-<%- include('../components/footer-bottom.ejs') %>
+</body>
+</html>
