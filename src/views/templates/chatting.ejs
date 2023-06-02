@@ -1,0 +1,146 @@
+<%# HEAD TOP 1/2 %>
+<%- include('../components/head-top.ejs') %>
+
+<%# --------------------------------------------- %>
+
+<!-- FONTS -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300&display=swap" rel="stylesheet">
+
+<!-- ICONS -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+<%# --------------------------------------------- %>
+
+<%# GENERAL STYLES %>
+<link rel="stylesheet" href="/styles/general.css">
+
+<%# NAV MENU STYLES %>
+<link rel="stylesheet" href="/styles/nav_menu.css">
+
+<%# CHATTING STYLES %>
+
+<link rel="stylesheet" href="/styles/chatting-styles.css">
+
+<%- include('../components/head-bottom.ejs') %>
+    <main class="main-body">
+        <%- include("../components/nav/nav_menu.ejs") %>
+
+            <div id="container">
+                <a href="http://localhost:3000/chatting" target="_blank"> <i class="fa-solid fa-vial"></i>  Client <i class="fa-solid fa-circle-user"></i></a>
+
+                <div class="view-chat">
+                    <div class="view-message" id="message-container">
+                        <!-- chat message -->
+                    </div>
+                    <div class="view-conf">
+                        <label for="user">User Name</label>
+                        <input type="text" name="name" class="user" maxlength="12" tabindex="1" autofocus>
+                        <label for="message">Message</label>
+                        <input type="text" id="" name="message" class="message" tabindex="2" maxlength="111">
+
+                        <button class="send"> <i class="fa-solid fa-share"> </i> </button>
+                    </div>
+                </div>
+
+
+            </div>
+    </main>
+
+<script src="http://localhost:3000/socket.io/socket.io.js" charset="utf-8"></script>
+<script>
+
+    // hamburguer
+    let ul = document.querySelector('.ul');
+    let logo = document.getElementsByClassName('hamburger')[0];
+    
+    logo.addEventListener('click', ( event) => {
+            if( ul.classList.contains('show') ){
+                ul.classList.remove('show');
+            }else{
+                ul.classList.add('show');
+            }
+
+    });
+
+    // Scroll Last Position
+    // Obtener el contenedor del mensaje
+    let container = document.getElementById('message-container');
+    let button = document.querySelector('.send');
+
+    // Función para ajustar el scroll al final del contenedor
+    function scrollToBottom() {
+        if (container.scrollHeight > container.clientHeight) {
+            container.scrollTop = container.scrollHeight - container.clientHeight;
+        }
+    }
+
+    // Ajustar el scroll al hacer clic en el botón "Send"
+    button.addEventListener('click', () => {
+        scrollToBottom();
+    });
+    // --------------------------------------------------
+    //Socket.io
+    
+    const socket = io()
+
+    // DOM Elements
+    // let general = document.querySelector(".view-chat")
+
+    // let actions = document.querySelector(".view-actions")
+
+    // message
+    let output = document.querySelector(".view-message");
+    let user = document.querySelector(".user");
+    let message = document.querySelector(".message");
+    let sending = document.querySelector(".send");
+
+    // 1º client listen if button with data check
+
+    sending.addEventListener('click', () => {
+        // 2º emited a personal event to server
+        socket.emit('chat:sending', { user: user.value, message: message.value} )
+        //alert('Hola')
+    });
+
+    socket.on('chat:sending', (data) => {
+
+        // output.innerHTML += `<div class="message-data> <h2>${data.user}</h2> <p> >_ ${data.message}</p></div>`
+        // output.innerHTML += `<div class="chating"> <h3> ${data.user} </h3> <p> ${data.message} </p> </div> `
+        let contenedor = document.createElement('div');
+        contenedor.setAttribute('class','chating');
+        let nom_usu = document.createElement('h3');
+        nom_usu.innerHTML = '<i class="fa-solid fa-feather"> </i>  - '+`${data.user}`;
+        let parrafo = document.createElement('p');
+        parrafo.textContent = `${data.message}`;
+
+        contenedor.appendChild(nom_usu);
+        contenedor.appendChild(parrafo);
+        output.appendChild(contenedor)
+
+        scrollToBottom();
+    });
+
+
+    // function aded(){
+    //     //console.log(general)
+
+    //     let y = document.querySelector(".view-chat").cloneNode(true)
+    //     document.querySelector("#container").appendChild(y)
+
+    //     sending = document.querySelector(".send")
+    //     sending.addEventListener('click', () => {
+    //         // 2º emited a personal event to server
+    //         socket.emit('chat:sending', { user: user.value, message: message.value} )
+            
+    //         //alert('Hola')
+    //     });
+
+    //     console.log(document.querySelector("#container"))
+    // }
+</script>
+
+
+    
+</body>
+</html>

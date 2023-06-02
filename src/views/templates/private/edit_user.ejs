@@ -2,8 +2,6 @@
 <%- include('../../components/head-top.ejs') %>
 
 <%# --------------------------------------------- %>
-<%# GENERAL STYLES %>
-<link rel="stylesheet" href="/styles/uiniversal-general-styles.css">
 
 <!-- FONTS -->
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -14,19 +12,21 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 <%# --------------------------------------------- %>
 
+<%# GENERAL STYLES %>
+<link rel="stylesheet" href="/styles/general.css">
+
+<%# NAV MENU STYLES %>
 <link rel="stylesheet" href="/styles/nav_menu.css">
+
+<%# ESTILOS EDIT USER %>
 <link rel="stylesheet" href="/styles/estilos-edit-user.css">
-<style>
-
-
-</style>
 
 <%- include('../../components/head-bottom.ejs') %>
     <main>
         <%- include("../../components/nav/nav_menu.ejs") %>
         <section class="main-body">
             <div class="edit-data">
-                <h2> <%= user_permision %> <%= passwd %> </h2>
+                <h2> <%- user_data[0].nombre %> <%- user_data[0].id_usuario %> </h2>
 
                 <div class="contenedor-editar">
 

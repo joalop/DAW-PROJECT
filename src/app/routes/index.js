@@ -238,10 +238,10 @@ router.post('/insert_user', have_session, is_admin, (req, res ) => {
 
 // POST EDIT_USER
 router.post('/edit_user', have_session, (req, res, next) => {
-    console.log(req.body);
+    console.log('Aqui?',req.body);
 
     saca_data_user_id(pool, req.body.user_id).then( ( response ) => {
-        console.log( response );
+        console.log( 'Aqui2?', response );
         res.render('templates/private/edit_user.ejs', {
             user_name: req.session.nombre,
             user_email: req.session.email,
@@ -329,6 +329,28 @@ router.post('/del_user', have_session, is_admin, ( req, res ) => {
         res.json( req.body );
     });
     
+});
+
+
+// -----------------------------
+// ------ FORAIGN MODULES ------
+// -----------------------------
+
+
+router.get('/draw_canvas', have_session, (req, res, next) => {
+    res.render('templates/modules/draw-canvas/draw-canvas.ejs', { user_name: req.session.nombre,
+        user_email: req.session.email,
+        user_permision: req.session.permiso_name, });
+});
+
+// -----------------------------
+// --------- CHATTING ---------
+// -----------------------------
+
+router.get('/chatting', have_session, (req, res, next) => {
+res.render('templates/chatting.ejs', { user_name: req.session.nombre,
+    user_email: req.session.email,
+    user_permision: req.session.permiso_name, })
 });
 
 // -----------------------------

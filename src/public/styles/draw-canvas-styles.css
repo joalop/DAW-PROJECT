@@ -1,0 +1,177 @@
+.main-body {
+  background: linear-gradient(90deg, rgb(154, 255, 253) 11%, rgb(123, 192, 228) 34%, rgb(63, 13, 218) 100%);
+  height: 100vh;
+  padding-top: 1rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.main-body .container {
+  display: flex;
+  width: 100%;
+  padding: 10px;
+  max-width: 1050px;
+}
+.main-body .container section {
+  margin: 0 0.5rem;
+  background: #fff;
+  border-radius: 7px;
+}
+.main-body .container .tools-board {
+  width: 210px;
+  padding: 15px 22px 0;
+  /* div .row .colors */
+  /* div .row .buttons */
+}
+.main-body .container .tools-board .row {
+  margin-bottom: 20px;
+}
+.main-body .container .tools-board .row .options {
+  list-style-type: none;
+  margin: 10px 0 0 5px;
+}
+.main-body .container .tools-board .row .options .option {
+  display: flex;
+  cursor: pointer;
+  align-items: center;
+  margin-bottom: 10px;
+}
+.main-body .container .tools-board .row .options .option .poligons {
+  color: #ff8965;
+}
+.main-body .container .tools-board .row .options .option:is(:hover, .active) i {
+  filter: invert(17%) sepia(90%) saturate(3000%) hue-rotate(900deg) brightness(100%) contrast(100%);
+}
+.main-body .container .tools-board .row .options .option :where(span, label) {
+  color: #5a6168;
+  padding-left: 10px;
+}
+.main-body .container .tools-board .row .options .option:is(:hover, .active) :where(span, label) {
+  color: #4a98f7;
+}
+.main-body .container .tools-board .row .options .option #fill-color {
+  height: 14px;
+  width: 14px;
+}
+.main-body .container .tools-board .row .options .option #size-slider {
+  width: 100px;
+  height: 5px;
+  margin-top: 10px;
+  background-color: #4a98f7;
+  border-radius: 5px;
+}
+.main-body .container .tools-board .row .options .range {
+  -webkit-appearance: none;
+  outline: none;
+}
+.main-body .container .tools-board .row .options .range::-webkit-slider-thumb {
+  background-color: #4a98f7;
+  border-radius: 10px;
+}
+.main-body .container .tools-board .colors .options {
+  display: flex;
+  justify-content: space-between;
+}
+.main-body .container .tools-board .colors .option {
+  height: 20px;
+  width: 20px;
+  background: red;
+  border-radius: 50%;
+  margin-top: 3px;
+  position: relative;
+}
+.main-body .container .tools-board .colors .option:nth-child(1) {
+  background-color: #fff;
+  border: 1px solid #bfbfbf;
+}
+.main-body .container .tools-board .colors .option:nth-child(2) {
+  background-color: #000;
+}
+.main-body .container .tools-board .colors .option:nth-child(3) {
+  background-color: #e02020;
+}
+.main-body .container .tools-board .colors .option:nth-child(4) {
+  background-color: #6dd400;
+}
+.main-body .container .tools-board .colors .option:nth-child(5) {
+  background-color: #4a98f7;
+}
+.main-body .container .tools-board .colors .option.selected::before {
+  position: absolute;
+  content: "";
+  top: 50%;
+  left: 50%;
+  height: 12px;
+  width: 12px;
+  background: inherit;
+  border-radius: inherit;
+  border: 2px solid #fff;
+  transform: translate(-50%, -50%);
+}
+.main-body .container .tools-board .colors .option:first-child.selected::before {
+  border-color: #ccc;
+}
+.main-body .container .tools-board .colors .option #color-picker {
+  opacity: 0;
+  cursor: pointer;
+}
+.main-body .container .tools-board .buttons button {
+  width: 100%;
+  color: #fff;
+  border: none;
+  outline: none;
+  padding: 11px 0;
+  margin-bottom: 13px;
+  background: none;
+  border-radius: 5px;
+}
+.main-body .container .tools-board .buttons .clear-canvas {
+  color: #6c757d;
+  font-size: 18px;
+  font-weight: bold;
+  border: 1px solid #6c757d;
+  transition: 0.7s;
+}
+.main-body .container .tools-board .buttons .clear-canvas:hover {
+  background-color: #d3d5d5;
+}
+.main-body .container .tools-board .buttons .save-img {
+  color: #4a98f7;
+  font-size: 18px;
+  font-weight: bold;
+  text-shadow: 0.5px 0.5px 0.5px black;
+  border: 5px solid #0a6de5;
+  transition: 0.7s;
+}
+.main-body .container .tools-board .buttons .save-img:hover {
+  background-color: #7ea8dc;
+}
+.main-body .container .drawing-board {
+  width: 95em;
+  overflow: hidden;
+  overflow-x: auto;
+  overflow-y: auto;
+  border: 1px solid black;
+}
+.main-body .draw-image {
+  display: none;
+  width: 80%;
+  height: auto;
+  border: 1px solid black;
+  border-radius: 10px;
+  z-index: 0;
+  overflow: 0.9;
+}
+
+@media only screen and (max-width: 1048px) {
+  .main-body header {
+    z-index: 10;
+  }
+  .main-body .container {
+    display: none;
+  }
+  .main-body .draw-image {
+    display: flex;
+  }
+}/*# sourceMappingURL=draw-canvas-styles.css.map */

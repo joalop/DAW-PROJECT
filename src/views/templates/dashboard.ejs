@@ -2,8 +2,6 @@
 <%- include('../components/head-top.ejs') %>
 
 <%# --------------------------------------------- %>
-<%# GENERAL STYLES %>
-<link rel="stylesheet" href="/styles/uiniversal-general-styles.css">
 
 <!-- FONTS -->
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -24,10 +22,10 @@
 <link rel="stylesheet" href="/styles/dashboard-styles.css">
 
 <%- include('../components/head-bottom.ejs') %>
-    <main>
+    <main class="main-body">
         <%- include("../components/nav/nav_menu.ejs") %>
         
-        <h2>Hola mundo <%- id_user %> </h2>
+        <!-- <h2>Hola mundo <%#- id_user %> </h2> -->
 
         <div id="dasboard-body">
             <div class="grupos container">
@@ -35,18 +33,18 @@
             </div>
 
             <div class="nota container">
-                <i class="fa-solid fa-plus"></i>  <i class="fa-solid fa-note-sticky"> </i> <i class="fa-solid fa-square-minus"> </i>
+                <i class="fa-solid fa-plus"></i>  <i class="fa-solid fa-note-sticky"> </i> <i class="fa-solid fa-square-minus"> <i class="fa-solid fa-cloud"> </i> </i>
             </div>
 
-            <div class="imagenes container">
-                <i class="fa-solid fa-plus"> </i> <i class="fa-solid fa-cloud"> </i> <i class="fa-regular fa-image"> </i>
+            <div class="chatting container">
+                <i class="fa-brands fa-rocketchat"></i>
             </div>
 
-            <div class="test-lab container">
-                <i class="fa-solid fa-flask-vial"> </i>
+            <div class="estructure container">
+                <i class="fa-solid fa-compass-drafting"></i> </i>
             </div>
 
-            <div class="user-profile container" onclick=" editar_user( 15 ) ">
+            <div class="user-profile container" onclick=" editar_user( `<%- id_user %>` ) ">
                 <i class="fa-solid fa-address-card user-identifier"> </i>
             </div>
 
@@ -55,10 +53,10 @@
 <script> console.log(`<%- id_user %>`); </script>
     <script>
         
-
+        // hamburguer
         let ul = document.querySelector('.ul');
         let logo = document.getElementsByClassName('hamburger')[0];
-        // hamburguer
+        
         logo.addEventListener('click', ( event) => {
                 if( ul.classList.contains('show') ){
                     ul.classList.remove('show');
@@ -76,7 +74,7 @@
              
             let dato = parseInt( identificador ); // dato ha enviar por POST
 
-            // Creando formulario
+            // Creando Formulario
             let form = document.createElement("form");
             form.method = "post";
             form.action = "/edit_user";
@@ -96,6 +94,18 @@
         
         };
         
+        // CANVAS DRAW
+        let draw_button = document.querySelector('.estructure');
+        draw_button.addEventListener('click', () => {
+            window.location.href = "http://localhost:3000/draw_canvas";
+        });
+
+        // USERS GROUP CHAT
+        // CANVAS DRAW
+        let chatting = document.querySelector('.chatting');
+        chatting.addEventListener('click', () => {
+            window.location.href = "http://localhost:3000/chatting";
+        });
 
     </script>
 
