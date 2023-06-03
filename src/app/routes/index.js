@@ -16,9 +16,14 @@ const { todos_los_usuarios, saca_data_user, saca_data_user_id, buscar_usuario,
 // ----------------------
 // FUNCIONES DB
 const { validaciones_correo } = require('./functions/validaciones');
+
 // ----------------------
 // FUNCIONES MIDDLEWARE
 const { have_session, is_admin, } = require('./middleware/session');
+
+// FUNCIONES NODEMAILER
+const { email, } = require('../modules/nodemailer/nodemailer');
+
 // VARIABLES GLOVALES
 var contra_text_plana;
 
@@ -151,9 +156,17 @@ router.post('/register', (req, res, next) => {
                         try{
                             if(error){ throw error; }
 
-                            registrar_usuario( pool, nombre, apellido, correo, hash, permiso = 2).then(
-                                res.render('templates/users', {})
-                            );
+                            registrar_usuario( pool, nombre, apellido, correo, hash, permiso = 2).then( ( response ) => {
+                                try{
+                                    email(receiver = correo, subject = 'Delaibrary', content = `Thanks for Sign-up in Delaibrary <br> User: ${nombre} ${apellido} your team will thanks you `).then( ( response ) => {
+                                        res.redirect('/login');
+                                    });
+
+                                }catch( error ){
+                                    console.log( error );
+                                    res.redirect('/login');
+                                };
+                            });
                         
                         }catch(error){
                         console.log( error );
@@ -203,13 +216,20 @@ router.get('/admin', have_session, is_admin, (req, res, next) => {
 
 // GET LOGOUT
 router.get('/logout', have_session, (req, res ) => {
-    req.session.destroy((err) => {
-      if (err) {
-        console.log('Error al destruir la sesión:', err);
-      } else {
-        res.redirect('/login');
-      }
-    });
+    try{
+        req.session.destroy((err) => {
+            if (err) {
+              console.log('Error al destruir la sesión:', err);
+            } else {
+              res.redirect('/login');
+            }
+          });
+
+    }catch( error ){
+        console.log( error );
+        res.redirect('/dashboard');
+    }
+
   });
 
   // - - - - - - - - - - - - - 
@@ -217,23 +237,27 @@ router.get('/logout', have_session, (req, res ) => {
 
 router.post('/insert_user', have_session, is_admin, (req, res ) => {
     //console.log( req.body );
-
     //encriptar contraseña
-    bcryp.hash( req.body.key4, 10, (error, hash ) => {
-        try{
-            registrar_usuario( pool, nombre = req.body.key1, apellido = req.body.key2, correo = req.body.key3, hash, permiso = 2)
-            .then(
-                res.json(req.body)
-            )
-            .catch( error => {
-                console.log( error );
-                res.json(req.body);
-            });
+    try{
+        bcryp.hash( req.body.key4, 10, (error, hash ) => {
+            try{
+                registrar_usuario( pool, nombre = req.body.key1, apellido = req.body.key2, correo = req.body.key3, hash, permiso = 2)
+                .then(
+                    res.json(req.body)
+                )
+                .catch( error => {
+                    console.log( error );
+                    res.json(req.body);
+                });
+    
+                }catch( error){
+                    console.log( error );
+                }
+        });
 
-            }catch( error){
-                console.log( error );
-            }
-    });
+    }catch( error ){
+        console.log( error );
+    }
 });
 
 // POST EDIT_USER
@@ -256,66 +280,72 @@ router.post('/edit_user', have_session, (req, res, next) => {
 });
 
 // POST/user_change_data
-
 router.post('/user_change_data', have_session, ( req, res, next ) => {
     console.log( req.body );
+    try{
 
-    if( req.body.validez == "" || req.body.validez == undefined || req.body.validez == null ){
-        // Sin vigencia
-        if( req.body.contra == "" || req.body.contra == undefined ){
-            // Sin contra y sin vigencia
-            req.body.id, req.body.nom, req.body.ape, req.body.usu_chat, req.body.correo, req.body.perm,
-
-            sql = `UPDATE usuarios set nombre = ?, apellidos = ?, usuario_chat = ?, email = ?, permisos = ? WHERE id_usuario = ?;`;
-
-            update_user( pool, sql, [ String( req.body.nom ), String( req.body.ape ), String( req.body.usu_chat ), String( req.body.correo ),
-                parseInt( req.body.perm ), parseInt( req.body.id ) ]).then( ( reponse ) => {
-                res.json( req.body);
-            });
-        } else {
-            // Con contra y sin vigencia
-            req.body.id, req.body.nom, req.body.ape, req.body.usu_chat, req.body.correo, req.body.validez, req.body.perm,
-
-            sql = `UPDATE usuarios set nombre = ?, apellidos = ?, usuario_chat = ?, email = ?, contrasenya = ?, permisos = ? WHERE id_usuario = ?;`;
-
-            bcryp.hash( req.body.contra, 10, ( error, hash ) => {
-
-                update_user( pool, sql, [ String( req.body.nom ), String( req.body.ape ), String( req.body.usu_chat ), String( req.body.correo ),
-                    String( hash ), parseInt( req.body.perm ), parseInt( req.body.id ) ])
-                    .then( ( reponse ) => {
-                    res.json( req.body);
-                });
-            });
-        };
-
-    } else {
-        // Con vigencia
-        if( req.body.contra == "" || req.body.contra == undefined ){
-            // Sin contra y con vigencia
-            req.body.id, req.body.nom, req.body.ape, req.body.usu_chat, req.body.correo, req.body.validez, req.body.perm,
-
-            sql = `UPDATE usuarios set nombre = ?, apellidos = ?, usuario_chat = ?, email = ?, permisos = ?, vigencia = ? WHERE id_usuario = ?;`;
-
-            update_user( pool, sql, [ String( req.body.nom ), String( req.body.ape ), String( req.body.usu_chat ), String( req.body.correo ),
-                parseInt( req.body.perm ), req.body.validez, parseInt( req.body.id ) ]).then( ( reponse ) => {
-                res.json( req.body);
-            });
-
-        } else {
-            // Con contra y con vigencia
-            req.body.id, req.body.nom, req.body.ape, req.body.usu_chat, req.body.contra, req.body.correo, req.body.validez, req.body.perm,
-
-            bcryp.hash( req.body.contra, 10, ( error, hash ) => {
-
-                sql = `UPDATE usuarios set nombre = ?, apellidos = ?, usuario_chat = ?, email = ?, contrasenya = ?, permisos = ?, vigencia = ? WHERE id_usuario = ?;`;
+        if( req.body.validez == "" || req.body.validez == undefined || req.body.validez == null ){
+            // Sin vigencia
+            if( req.body.contra == "" || req.body.contra == undefined ){
+                // Sin contra y sin vigencia
+                req.body.id, req.body.nom, req.body.ape, req.body.usu_chat, req.body.correo, req.body.perm,
+    
+                sql = `UPDATE usuarios set nombre = ?, apellidos = ?, usuario_chat = ?, email = ?, permisos = ? WHERE id_usuario = ?;`;
     
                 update_user( pool, sql, [ String( req.body.nom ), String( req.body.ape ), String( req.body.usu_chat ), String( req.body.correo ),
-                   String( hash ), parseInt( req.body.perm ), req.body.validez, parseInt( req.body.id ) ]).then( ( reponse ) => {
+                    parseInt( req.body.perm ), parseInt( req.body.id ) ]).then( ( reponse ) => {
                     res.json( req.body);
                 });
-            });
+            } else {
+                // Con contra y sin vigencia
+                req.body.id, req.body.nom, req.body.ape, req.body.usu_chat, req.body.correo, req.body.validez, req.body.perm,
+    
+                sql = `UPDATE usuarios set nombre = ?, apellidos = ?, usuario_chat = ?, email = ?, contrasenya = ?, permisos = ? WHERE id_usuario = ?;`;
+    
+                bcryp.hash( req.body.contra, 10, ( error, hash ) => {
+    
+                    update_user( pool, sql, [ String( req.body.nom ), String( req.body.ape ), String( req.body.usu_chat ), String( req.body.correo ),
+                        String( hash ), parseInt( req.body.perm ), parseInt( req.body.id ) ])
+                        .then( ( reponse ) => {
+                        res.json( req.body);
+                    });
+                });
+            };
+    
+        } else {
+            // Con vigencia
+            if( req.body.contra == "" || req.body.contra == undefined ){
+                // Sin contra y con vigencia
+                req.body.id, req.body.nom, req.body.ape, req.body.usu_chat, req.body.correo, req.body.validez, req.body.perm,
+    
+                sql = `UPDATE usuarios set nombre = ?, apellidos = ?, usuario_chat = ?, email = ?, permisos = ?, vigencia = ? WHERE id_usuario = ?;`;
+    
+                update_user( pool, sql, [ String( req.body.nom ), String( req.body.ape ), String( req.body.usu_chat ), String( req.body.correo ),
+                    parseInt( req.body.perm ), req.body.validez, parseInt( req.body.id ) ]).then( ( reponse ) => {
+                    res.json( req.body);
+                });
+    
+            } else {
+                // Con contra y con vigencia
+                req.body.id, req.body.nom, req.body.ape, req.body.usu_chat, req.body.contra, req.body.correo, req.body.validez, req.body.perm,
+    
+                bcryp.hash( req.body.contra, 10, ( error, hash ) => {
+    
+                    sql = `UPDATE usuarios set nombre = ?, apellidos = ?, usuario_chat = ?, email = ?, contrasenya = ?, permisos = ?, vigencia = ? WHERE id_usuario = ?;`;
+        
+                    update_user( pool, sql, [ String( req.body.nom ), String( req.body.ape ), String( req.body.usu_chat ), String( req.body.correo ),
+                       String( hash ), parseInt( req.body.perm ), req.body.validez, parseInt( req.body.id ) ]).then( ( reponse ) => {
+                        res.json( req.body);
+                    });
+                });
+            };
         };
-    };
+
+    }catch( error ){
+        console.log( error );
+        res.json( req.body);
+    }
+
 });
 
 // GET DELETE_USER
@@ -343,14 +373,55 @@ router.get('/draw_canvas', have_session, (req, res, next) => {
         user_permision: req.session.permiso_name, });
 });
 
-// -----------------------------
+// ----------------------------
 // --------- CHATTING ---------
-// -----------------------------
+// ----------------------------
 
 router.get('/chatting', have_session, (req, res, next) => {
 res.render('templates/chatting.ejs', { user_name: req.session.nombre,
     user_email: req.session.email,
     user_permision: req.session.permiso_name, })
+});
+
+// -------------------------
+// --------- EMAIL ---------
+// -------------------------
+router.get('/email', have_session, (req, res, next) => {
+
+    todos_los_usuarios( pool ).then( ( response ) => {
+        res.render('templates/email.ejs',  { user_name: req.session.nombre,
+            user_email: req.session.email,
+            user_permision: req.session.permiso_name, usuarios: response});
+    });
+    
+});
+
+router.post('/email', have_session, ( req, res, next) => {
+console.log( req.body );
+try{
+    console.log( req.body.writed );
+    console.log( req.body.email );
+    console.log( req.body.subject );
+    console.log( req.body.content );
+
+    if(req.body.writed == ""){
+        email( receiver = req.body.email , subject = req.body.subject, content = req.body.content).then( ( response ) => {
+            console.log(' Succesfull email send by req.body.email');
+            res.redirect('/email');
+        });
+    }else{
+        email( receiver = req.body.email , subject = req.body.subject, content = req.body.content).then( ( response ) => {
+            console.log(' Succesfull email send by req.body.writed');
+            res.redirect('/email');
+        });
+    }
+
+}catch( error ){
+    console.log( error );
+    res.redirect('/email');
+};
+
+
 });
 
 // -----------------------------

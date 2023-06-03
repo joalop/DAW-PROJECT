@@ -1,0 +1,89 @@
+<%# HEAD TOP 1/2 %>
+<%- include('../components/head-top.ejs') %>
+
+<%# --------------------------------------------- %>
+
+<!-- FONTS -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300&display=swap" rel="stylesheet">
+
+<!-- ICONS -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+<%# --------------------------------------------- %>
+
+<%# GENERAL STYLES %>
+<link rel="stylesheet" href="/styles/general.css">
+
+<%# NAV MENU STYLES %>
+<link rel="stylesheet" href="/styles/nav_menu.css">
+
+    <!-- <title> <%#= title %> </title> -->
+    <%# if(cookie == 'dark'){%>
+    <!-- <script> document.body.style.backgroundColor = 'black'; </script>  -->
+    <%#}else{%>
+        <!-- <script> document.body.style.backgroundColor = 'white'; </script> -->
+    <%#}%>
+
+<%# EMAIL STYLES %>
+<link rel="stylesheet" href="/styles/email-style.css">
+
+<%- include('../components/head-bottom.ejs') %>
+    <main class="main-body">
+        <%- include("../components/nav/nav_menu.ejs") %>
+
+        <div class="email-contenedor">
+            <form action="/email" method="post" class="email-form" id="">
+                <div class="contenedor-datos">
+
+                    <div class="write-email-receiver">
+                        <label for="write">Write Email Receiver</label>
+                        <input type="text" name="writed" id="write" placeholder="example@gmail.com">
+                    </div>
+        
+                    <div class="select-email-receiver">
+                        <label for="write">Select Receiver</label>
+                    
+                        <select name="email" id="" class="" >
+                            <option value="" > . . . </option>
+                            <% for( let i = 0; i < usuarios.length; i++){ %>
+                                <option value="<%- usuarios[i].email %>" > <%- usuarios[i].email %> </option>
+                            <% } %>
+                        </select>
+                    </div>
+        
+                    <div class="subject-email-receiver">
+                        <label for="subject">Subject</label>
+                        <input type="text" name="subject" id="subject" class="" required>
+                    </div>
+        
+                    <div class="text-email-receiver">
+                        <label for="content">EMAIL BODY "Text Plain"</label>
+                        <textarea name="content" id="content" class="" cols="8" rows="4" required></textarea>
+                    </div>
+                    <div class="submit-email">
+                        <input type="submit" class="submit-email-buttom" value="Send Email" >
+                    </div>
+            </form>
+        </div>
+    </main>
+
+    <script>
+
+        // hamburguer
+        let ul = document.querySelector('.ul');
+        let logo = document.getElementsByClassName('hamburger')[0];
+        
+        logo.addEventListener('click', ( event) => {
+                if( ul.classList.contains('show') ){
+                    ul.classList.remove('show');
+                }else{
+                    ul.classList.add('show');
+                }
+
+        });
+
+    </script>
+
+  </body>
+</html>

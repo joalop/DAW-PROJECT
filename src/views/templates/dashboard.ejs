@@ -28,12 +28,12 @@
         <!-- <h2>Hola mundo <%#- id_user %> </h2> -->
 
         <div id="dasboard-body">
-            <div class="grupos container">
-                <i class="fa-solid fa-user-group"> </i> <i class="fa-solid fa-plus"> </i>  <i class="fa-solid fa-ban"> </i> <i class="fa-solid fa-diagram-project"> </i> <i class="fa-solid fa-circle-half-stroke"> </i>
+            <div class="email container">
+                <i class="fa-solid fa-envelope"> </i>
             </div>
 
             <div class="nota container">
-                <i class="fa-solid fa-plus"></i>  <i class="fa-solid fa-note-sticky"> </i> <i class="fa-solid fa-square-minus"> <i class="fa-solid fa-cloud"> </i> </i>
+                <i class="fa-solid fa-plus"> </i>  <i class="fa-solid fa-note-sticky"> </i> <i class="fa-solid fa-square-minus"> </i> <i class="fa-solid fa-cloud"> </i> </i>
             </div>
 
             <div class="chatting container">
@@ -101,10 +101,16 @@
         });
 
         // USERS GROUP CHAT
-        // CANVAS DRAW
         let chatting = document.querySelector('.chatting');
         chatting.addEventListener('click', () => {
             window.location.href = "http://localhost:3000/chatting";
+        });
+
+        // MAIL
+        let email = document.querySelector('.email');
+
+        email.addEventListener('click', () => {
+            window.location.href = "http://localhost:3000/email";
         });
 
     </script>

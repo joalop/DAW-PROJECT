@@ -18,8 +18,13 @@
 <%# INICIAL STYLES %>
 <link rel="stylesheet" href="/styles/inicial.css">
 
-<%# STYLES NAV INICIO %>
-<link rel="stylesheet" href="/styles/nav-inicio.css">
+<% if( session == 'si'){ %>
+    <%# STYLES NAV MENU %>
+    <link rel="stylesheet" href="/styles/nav_menu.css">
+<% } else { %>
+    <%# STYLES NAV INICIO %>
+    <link rel="stylesheet" href="/styles/nav-inicio.css">
+<% } %>
 
 <style>
     .main-body{
@@ -37,7 +42,13 @@
 <%- include('../components/head-bottom.ejs') %>
     <main>
         <%# Header + Nav Component %>
-        <%- include('../components/nav/nav_inicio.ejs') %>
+        
+        <% if( session == 'no') { %>
+            <%- include('../components/nav/nav_inicio.ejs') %>
+        <% } %>
+        <% if( session == 'si'){ %>
+            <%- include('../components/nav/nav_menu.ejs') %>
+        <% } %>
 
         <section class="main-body">
             <h1> <b> Syntax Error 404 </b>  </h1>

@@ -1,0 +1,139 @@
+.email-contenedor {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background: linear-gradient(90deg, rgb(154, 255, 253) 11%, rgb(123, 192, 228) 34%, rgb(63, 13, 218) 100%);
+  height: 100vh;
+}
+.email-contenedor .email-form {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 10px;
+  width: 30%;
+  background: #fff;
+  box-shadow: 1px 1px 1px 1px #000;
+  border-radius: 10px;
+}
+.email-contenedor .email-form .write-email-receiver, .email-contenedor .email-form .select-email-receiver, .email-contenedor .email-form .subject-email-receiver, .email-contenedor .email-form .text-email-receiver, .email-contenedor .email-form .submit-email {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.email-contenedor .email-form .write-email-receiver {
+  margin: 0.5rem;
+}
+.email-contenedor .email-form .write-email-receiver input, .email-contenedor .email-form .write-email-receiver label {
+  margin: 0.25rem;
+  width: 10rem;
+  width: 15rem;
+  padding: 10px;
+  background: #fff;
+  box-shadow: 1px 1px 1px 1px #000;
+  border-radius: 10px;
+  font-weight: bold;
+  font-size: 16px;
+}
+.email-contenedor .email-form .write-email-receiver label {
+  background: linear-gradient(90deg, rgb(0, 0, 0) 7%, rgb(48, 43, 83) 53%, rgb(138, 122, 250) 81%);
+  text-align: center;
+  color: #fff;
+  text-shadow: 0.5px 0.5px 0.5px #000;
+}
+.email-contenedor .email-form .select-email-receiver {
+  margin: 0.5rem;
+}
+.email-contenedor .email-form .select-email-receiver select, .email-contenedor .email-form .select-email-receiver label {
+  margin: 0.25rem;
+  width: 15rem;
+  padding: 10px;
+  background: #fff;
+  box-shadow: 1px 1px 1px 1px #000;
+  border-radius: 10px;
+  font-weight: bold;
+  font-size: 16px;
+}
+.email-contenedor .email-form .select-email-receiver label {
+  width: 15rem;
+  background: linear-gradient(90deg, rgb(0, 0, 0) 7%, rgb(48, 43, 83) 53%, rgb(138, 122, 250) 81%);
+  text-align: center;
+  color: #fff;
+  text-shadow: 0.5px 0.5px 0.5px #000;
+}
+.email-contenedor .email-form .select-email-receiver select {
+  width: 16rem;
+}
+.email-contenedor .email-form .subject-email-receiver {
+  margin: 0.5rem;
+}
+.email-contenedor .email-form .subject-email-receiver input, .email-contenedor .email-form .subject-email-receiver label {
+  margin: 0.25rem;
+  width: 15rem;
+  padding: 10px;
+  background: #fff;
+  box-shadow: 1px 1px 1px 1px #000;
+  border-radius: 10px;
+  font-weight: bold;
+  font-size: 16px;
+}
+.email-contenedor .email-form .subject-email-receiver label {
+  background: linear-gradient(90deg, rgb(0, 0, 0) 7%, rgb(48, 43, 83) 53%, rgb(138, 122, 250) 81%);
+  text-align: center;
+  color: #fff;
+  text-shadow: 0.5px 0.5px 0.5px #000;
+}
+.email-contenedor .email-form .text-email-receiver {
+  margin: 0.5rem;
+}
+.email-contenedor .email-form .text-email-receiver textarea, .email-contenedor .email-form .text-email-receiver label {
+  margin: 0.25rem;
+  width: 15rem;
+  padding: 10px;
+  background: #fff;
+  box-shadow: 1px 1px 1px 1px #000;
+  border-radius: 10px;
+  font-weight: bold;
+  font-size: 16px;
+}
+.email-contenedor .email-form .text-email-receiver label {
+  background: linear-gradient(90deg, rgb(0, 0, 0) 7%, rgb(48, 43, 83) 53%, rgb(138, 122, 250) 81%);
+  text-align: center;
+  color: #fff;
+  text-shadow: 0.5px 0.5px 0.5px #000;
+}
+.email-contenedor .email-form .submit-email {
+  margin: 0.5rem;
+}
+.email-contenedor .email-form .submit-email input {
+  cursor: pointer;
+  padding: 10px;
+  width: 15rem;
+  background: rgb(123, 192, 228);
+  color: #fff;
+  text-shadow: 0.5px 0.5px 0.5px #000;
+  box-shadow: 1px 1px 1px 1px #000;
+  border-radius: 10px;
+  font-weight: bold;
+  font-size: 16px;
+  text-align: center;
+  transition: 0.8s;
+}
+.email-contenedor .email-form .submit-email input:hover {
+  transform: translateX(10px);
+  background: linear-gradient(20deg, rgb(83, 83, 200) 20%, rgb(9, 9, 121) 100%);
+  opacity: 0.75;
+}
+
+@media only screen and (max-width: 1048px) {
+  .email-contenedor {
+    padding-top: 5rem;
+    padding-bottom: 2rem;
+    height: 100vh;
+  }
+  .email-contenedor .email-form {
+    width: 70%;
+  }
+}/*# sourceMappingURL=email-style.css.map */

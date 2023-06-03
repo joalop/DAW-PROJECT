@@ -45,13 +45,10 @@ app.set('port', process.env.PORT || 3000)
 
 // MIDDLEWARES
 
-app.use(express.urlencoded({ extended: true }));
-app.use(express.json());
 app.use(logger('dev'));
-
-
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser());
-// ----------------------------------------------------
 
 // Static Files
 app.use( express.static(path.join(__dirname,"../public")) )
@@ -106,7 +103,17 @@ app.get('/mysql', (req, res, next) => {
 
 // Configuración de la ruta 404
 app.use( (req, res, next) => {
-   res.status(404).render('templates/not-found.ejs')
+
+   if( req.session.permiso_name ){
+      res.status(404).render('templates/not-found.ejs', { session: 'si', user_name: req.session.nombre,
+      user_email: req.session.email,
+      user_permision: req.session.permiso_name, });
+
+   } else {
+      res.status(404).render('templates/not-found.ejs', { session: 'no' });
+   }
+
+   
  });
 
 
