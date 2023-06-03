@@ -1,9 +1,8 @@
-select * from permisos_usuarios;
+use managebd;
 
-select * from permisos_grupos;
 
 select * from usuarios;
+delete FROM usuarios WHERE id_usuario=7;
+select * from permisos_usuarios;
 
-select * from grupos;
-
-select * from miembros_grupos;
+select * from sessions;
