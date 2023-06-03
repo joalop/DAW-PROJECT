@@ -1,0 +1,143 @@
+.main-body {
+  margin: 0;
+}
+.main-body header {
+  width: 100%;
+}
+.main-body .content {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 100vh;
+  background: rgb(210, 253, 255);
+  background: linear-gradient(90deg, rgb(210, 253, 255) 10%, rgb(83, 83, 200) 69%, rgb(9, 9, 121) 100%);
+}
+.main-body .content .content-data {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: cente;
+  padding: 10px;
+  background: #fff;
+  border-radius: 10px;
+  box-shadow: 1px 1px 1px 1px #000;
+}
+.main-body .content footer {
+  position: absolute;
+  bottom: 0;
+  left: 30%;
+  width: 45%;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+.main-body .content footer .div {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+.main-body .content footer .div ul {
+  list-style-type: none;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+.main-body .content footer .div ul li {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  margin: 0 0.25rem;
+  width: -moz-fit-content;
+  width: fit-content;
+  background: #fff;
+  padding: 5px;
+  border: 0.01px solid black;
+  border-radius: 10px;
+}
+.main-body .content footer .div ul li i.whatshapp {
+  padding: 2.5px;
+  background: #64d29b;
+  border-radius: 50%;
+}
+.main-body .content footer .div ul li p.whatshapp {
+  cursor: pointer;
+  margin-left: 0.5rem;
+  background: #c7ffe3;
+  font-weight: bold;
+  padding: 2.5px 5px;
+  color: #122d9a;
+  text-decoration: underline;
+  box-shadow: 1px 1px 1px 1px #000;
+  border-radius: 10px;
+}
+.main-body .content footer .div ul li i.facebook {
+  padding: 2.5px;
+  background: #60bdff;
+  border-radius: 50%;
+}
+.main-body .content footer .div ul li p.facebook {
+  cursor: pointer;
+  margin-left: 0.5rem;
+  background: #c9e7fc;
+  color: #122d9a;
+  text-decoration: underline;
+  font-weight: bold;
+  padding: 2.5px 5px;
+  box-shadow: 1px 1px 1px 1px #000;
+  border-radius: 10px;
+}
+.main-body .content footer .div ul li i.instagram {
+  padding: 2.5px;
+  background: #7c2aff;
+  border-radius: 50%;
+}
+.main-body .content footer .div ul li p.instagram {
+  cursor: pointer;
+  margin-left: 0.5rem;
+  background: #b68ef7;
+  color: #122d9a;
+  text-decoration: underline;
+  font-weight: bold;
+  padding: 2.5px 5px;
+  box-shadow: 1px 1px 1px 1px #000;
+  border-radius: 10px;
+}
+
+@media only screen and (max-width: 1048px) {
+  header {
+    z-index: 10;
+  }
+  header ul {
+    margin-top: 2.3rem !important;
+    line-height: 40px !important;
+  }
+  .content {
+    padding-top: 2rem;
+    height: 80vh;
+  }
+  .content .content-data {
+    width: 80%;
+    text-align: justify;
+  }
+  .content footer {
+    flex-direction: column !important;
+    z-index: 0 !important;
+    left: 25% !important;
+  }
+  .content footer .div {
+    flex-direction: column !important;
+    justify-content: center !important;
+    width: -moz-fit-content !important;
+    width: fit-content !important;
+  }
+  .content footer .div ul {
+    flex-direction: column !important;
+  }
+  .content footer .div ul li p {
+    width: 10rem;
+    text-align: center;
+  }
+}/*# sourceMappingURL=inicio-styles.css.map */

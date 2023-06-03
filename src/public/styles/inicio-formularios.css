@@ -13,6 +13,12 @@ body {
   /*  background-repeat: no-repeat
   *  */
 }
+body main {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-content: center;
+}
 body main .seccion-centrada {
   display: flex;
   flex-direction: column;
@@ -93,4 +99,105 @@ body main .seccion-centrada .reaccion {
   color: brown;
   font-size: 16px;
   font-weight: bold;
+}
+body main footer {
+  position: absolute;
+  bottom: 0;
+  left: 40%;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+body main footer .div {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+body main footer .div ul {
+  list-style-type: none;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+body main footer .div ul li {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  margin: 0 0.25rem;
+  width: -moz-fit-content;
+  width: fit-content;
+  background: #fff;
+  padding: 5px;
+  border: 0.01px solid black;
+  border-radius: 10px;
+}
+body main footer .div ul li i.whatshapp {
+  padding: 2.5px;
+  background: #64d29b;
+  border-radius: 50%;
+}
+body main footer .div ul li p.whatshapp {
+  cursor: pointer;
+  margin-left: 0.5rem;
+  background: #c7ffe3;
+  font-weight: bold;
+  padding: 2.5px 5px;
+  color: #122d9a;
+  text-decoration: underline;
+  box-shadow: 1px 1px 1px 1px #000;
+  border-radius: 10px;
+}
+body main footer .div ul li i.facebook {
+  padding: 2.5px;
+  background: #60bdff;
+  border-radius: 50%;
+}
+body main footer .div ul li p.facebook {
+  cursor: pointer;
+  margin-left: 0.5rem;
+  background: #c9e7fc;
+  color: #122d9a;
+  text-decoration: underline;
+  font-weight: bold;
+  padding: 2.5px 5px;
+  box-shadow: 1px 1px 1px 1px #000;
+  border-radius: 10px;
+}
+body main footer .div ul li i.instagram {
+  padding: 2.5px;
+  background: #7c2aff;
+  border-radius: 50%;
+}
+body main footer .div ul li p.instagram {
+  cursor: pointer;
+  margin-left: 0.5rem;
+  background: #b68ef7;
+  color: #122d9a;
+  text-decoration: underline;
+  font-weight: bold;
+  padding: 2.5px 5px;
+  box-shadow: 1px 1px 1px 1px #000;
+  border-radius: 10px;
+}
+
+@media only screen and (max-width: 1048px) {
+  footer {
+    flex-direction: column !important;
+    z-index: 0 !important;
+    left: 25% !important;
+  }
+  footer .div {
+    flex-direction: column !important;
+    justify-content: center !important;
+    width: -moz-fit-content !important;
+    width: fit-content !important;
+  }
+  footer .div ul {
+    flex-direction: column !important;
+  }
+  footer .div ul li p {
+    width: 10rem;
+    text-align: center;
+  }
 }/*# sourceMappingURL=inicio-formularios.css.map */

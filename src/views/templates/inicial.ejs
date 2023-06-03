@@ -21,71 +21,44 @@
 <%# STYLES NAV INICIO %>
 <link rel="stylesheet" href="/styles/nav-inicio.css">
 
-<style>
-
-    footer {
-
-        width: 100%;
-
-        display: flex;
-        flex-direction: row;
-        justify-content: space-between;
-    }
-
-    footer div{
-        display: flex;
-        flex-direction: row;
-        justify-content: space-between;
-    }
-
-    footer div ul{
-        list-style-type: none;
-
-        display: flex;
-        flex-direction: row;
-        justify-content: space-between;
-    }
-
-    footer div ul li{
-        margin: 0 0.25rem;
-        width: 3rem;
-        padding: 5px;
-        border: 0.01px solid black;
-        border-radius: 10px;
-    }
-</style>
+<%# STYLES INICIO %>
+<link rel="stylesheet" href="/styles/inicio-styles.css">
 
 <%# HEAD BOTTOM "2/2 %>
 <%- include('../components/head-bottom.ejs') %>
 
-    <main>
+    <main class="main-body">
 
         <%# HEADER + NAV COMPONENT %>
         <%- include('../components/nav/nav_inicio.ejs') %>
-        
-        <section class="main-body">
-            <h2>Inicio</h2>
-        </section>
 
-        <%# FOOTER COMPONENT %>
-        <%- include('../components/footer/footer.ejs') %>
+        <div class="content">
 
-        <script>
-            let ul = document.querySelector('.ul');
-            let logo = document.getElementsByClassName('hamburger')[0];
-    
-           logo.addEventListener('click', ( event) => {
-                if( ul.classList.contains('show') ){
-                    ul.classList.remove('show');
-                }else{
-                    ul.classList.add('show');
-                }
-    
-            });
-    
-        </script>
+            <div class="content-data">
+                <h2>HOME</h2>
+                <p> Thank you for trusting us. <br> We are a rental website to help in the operation of TeamWorks.</p>
+            </div>
+
+            <%# FOOTER COMPONENT %>
+            <%- include('../components/footer/footer.ejs') %>
+
+        </div>
 
     </main>
 
-<%# FOOTER BOTTOM %>
-<%- include('../components/footer-bottom.ejs') %>
+    <script>
+        let ul = document.querySelector('.ul');
+        let logo = document.getElementsByClassName('hamburger')[0];
+
+       logo.addEventListener('click', ( event) => {
+            if( ul.classList.contains('show') ){
+                ul.classList.remove('show');
+            }else{
+                ul.classList.add('show');
+            }
+
+        });
+    </script>
+
+</body>
+</html>

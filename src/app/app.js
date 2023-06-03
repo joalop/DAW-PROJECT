@@ -65,11 +65,11 @@ app.use(favicon(path.join(__dirname, '../public/images/icons/Untitled-Design.ico
 //    saveUninitialized: true,
 // }))
 const options = {
-   host: 'localhost',
+   host: 'bgeewmpmykr14vhqeknc-mysql.services.clever-cloud.com',
    port: 3306,
-   user: 'root',
-   password: 'root',
-   database: 'managebd',
+   user: 'ufmyz6jebp6lhp14',
+   password: 'jYjtyXwOjzpoGvJFQw5E',
+   database: 'bgeewmpmykr14vhqeknc',
 };
 
 const sessionStore = new sesions_mysql( options );
