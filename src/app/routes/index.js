@@ -8,7 +8,6 @@ const fs = require('fs');
 // Login coments
 let comments = "";
 
-
 // CONST POOL
 const pool = require('../database/connection')
 // ----------------------
@@ -52,61 +51,41 @@ router.post('/login', (req, res, next) => {
                 bcryp.compare(req.body.password, response[1], ( error, response ) => {
                     try{
                         if( error ){ throw error };
-                        
                         if( response ){
                             // Ok
-
                             let user_profile = saca_data_user(pool, req.body.email)
                             user_profile.then( response => {
-
-                                
                                 req.session.nombre = response[0].nombre;
                                 req.session.email = response[0].email;
                                 req.session.permiso_id = response[0].permisos;
                                 req.session.id_usuario = response[0].id_usuario;
                                 
                                 //console.log( req.session.id_usuario );
-
                                 //console.log('Response: ', response);
                                 //console.log('Response permiso: ', response[0].permisos );
 
                                 let permiso_name = nom_permiso_usuario(pool, req.session.permiso_id);
                                 permiso_name.then( ( permiso ) => {
                                     // console.log('Response: ', permiso)
-                                    //
                                     req.session.permiso_name = permiso[0].nombre;  // 'USER', 'ADMINISTRATOR'
-
                                     res.render( 'templates/dashboard.ejs', { user_name: req.session.nombre, user_email: req.session.email, user_permision: req.session.permiso_name, id_user: req.session.id_usuario, param1Value : "" } );
                                 });
                             });
-
                         }else{
                             res.render( 'templates/login', { comments, respuesta_usuario_login: "Incorrect Password or Email" } );
-
                         };
-                        
-                    }catch( error){
-                        console.log( error );
-
-                    }
+                    }catch( error){ console.log( error ); };
                 });
             } else {
                 res.render( 'templates/login', { comments, respuesta_usuario_login: "Incorrect Password or Email" } );
             }
-
         });
-
-    }catch(error){
-        console.log(error)
-    }
-
+    }catch( error ){ console.log(error); };
 });
 
 // GET REGISTER
 router.get('/register', (req, res, next) => {
-    
     let inconvenientes = "";
-
     res.render('templates/register.ejs', { inconvenientes: "" })
 });
 
@@ -152,7 +131,6 @@ router.post('/register', (req, res, next) => {
                     res.render('templates/register.ejs', { inconvenientes: inconvenientes });
 
                 }else{
-
                     //encriptar contraseña
                     bcryp.hash(contraseña, 10, (error, hash ) => {
                         try{
@@ -169,36 +147,31 @@ router.post('/register', (req, res, next) => {
                                     res.redirect('/login');
                                 };
                             });
-                        
                         }catch(error){
                         console.log( error );
                         } 
                     });
                 }
             });
-        }catch(error){
-            console.log(error)
-        }
+        }catch(error){ console.log(error); };
 });
-
 
 // GET DASHBOARD
 router.get('/dashboard', have_session, (req, res, next) => {
-    let comments = "";
-    let param1Value = "";
-    if(req.query.param1){
-        param1Value = req.query.param1;
-    }
+    try{
+        let comments = "";
+        let param1Value = "";
+        // existe query?
+        if( req.query.param1 ){ param1Value = req.query.param1; };
 
-    
-
-    res.render( 'templates/dashboard.ejs', {
-        user_name: req.session.nombre,
-        user_email: req.session.email,
-        user_permision: req.session.permiso_name,
-        id_user: req.session.id_usuario,
-        comments, param1Value
-    });
+        res.render( 'templates/dashboard.ejs', {
+            user_name: req.session.nombre,
+            user_email: req.session.email,
+            user_permision: req.session.permiso_name,
+            id_user: req.session.id_usuario,
+            comments, param1Value
+        });
+    }catch( error ){ console.log( error ); };
 });
 
 // GET ADMIN
@@ -207,7 +180,6 @@ router.get('/admin', have_session, is_admin, (req, res, next) => {
         todos_los_usuarios(pool)
         .then( response2 => {
                 // console.log(response2);
-
                 res.render('templates/private/admin.ejs', {
                     user_name: req.session.nombre,
                     user_email: req.session.email,
@@ -215,145 +187,102 @@ router.get('/admin', have_session, is_admin, (req, res, next) => {
                     usuarios:  response2,
                 });
         });
-
-    }catch( error ){
-        console.log( error );
-    }
-        
+    }catch( error ){ console.log( error ); };
 });
 
 // GET LOGOUT
 router.get('/logout', have_session, (req, res ) => {
     try{
-        req.session.destroy((err) => {
+        req.session.destroy( (err ) => {
             if (err) {
               console.log('Error al destruir la sesión:', err);
             } else {
               res.redirect('/login');
             }
           });
-
-    }catch( error ){
-        console.log( error );
-        res.redirect('/dashboard');
-    }
-
+    }catch( error ){ console.log( error ); res.redirect('/dashboard'); };
   });
 
-  // - - - - - - - - - - - - - 
-  // GET /INSERT_USER
-
+// POST /INSERT_USER
 router.post('/insert_user', have_session, is_admin, (req, res ) => {
     //console.log( req.body );
     //encriptar contraseña
     try{
         bcryp.hash( req.body.key4, 10, (error, hash ) => {
             try{
-                registrar_usuario( pool, nombre = req.body.key1, apellido = req.body.key2, correo = req.body.key3, hash, permiso = 2)
-                .then(
-                    res.json(req.body)
-                )
-                .catch( error => {
-                    console.log( error );
-                    res.json(req.body);
-                });
-    
-                }catch( error){
-                    console.log( error );
-                }
+                    registrar_usuario( pool, nombre = req.body.key1, apellido = req.body.key2, correo = req.body.key3, hash, permiso = 2)
+                    .then(
+                        res.json(req.body)
+                    )
+                    .catch( error => { console.log( error ); res.json(req.body); });
+            }catch( error){ console.log( error ); };
         });
-
-    }catch( error ){
-        console.log( error );
-    }
+    }catch( error ){ console.log( error ); };
 });
 
 // POST EDIT_USER
 router.post('/edit_user', have_session, (req, res, next) => {
-    console.log('Aqui?',req.body);
+    //console.log('Aqui?',req.body);
+    try{
+        saca_data_user_id(pool, req.body.user_id).then( ( response ) => {
+            console.log( 'Aqui2?', response );
+            res.render('templates/private/edit_user.ejs', {
+                user_name: req.session.nombre,
+                user_email: req.session.email,
+                user_permision: req.session.permiso_name,
+                passwd: contra_text_plana,
+                user_data: response,
+            });
+        })
+        .catch( error => { console.log( error ); });
 
-    saca_data_user_id(pool, req.body.user_id).then( ( response ) => {
-        console.log( 'Aqui2?', response );
-        res.render('templates/private/edit_user.ejs', {
-            user_name: req.session.nombre,
-            user_email: req.session.email,
-            user_permision: req.session.permiso_name,
-            passwd: contra_text_plana,
-            user_data: response,
-        });
-    })
-    .catch( error => {
-        console.log( error );
-    });
+    }catch( error ){ console.log( error ); };
 });
 
 // POST/user_change_data
 router.post('/user_change_data', have_session, ( req, res, next ) => {
-    console.log( req.body );
+    //console.log( req.body );
     try{
-
         if( req.body.validez == "" || req.body.validez == undefined || req.body.validez == null ){
             // Sin vigencia
             if( req.body.contra == "" || req.body.contra == undefined ){
                 // Sin contra y sin vigencia
-                req.body.id, req.body.nom, req.body.ape, req.body.usu_chat, req.body.correo, req.body.perm,
-    
+                // req.body.id, req.body.nom, req.body.ape, req.body.usu_chat, req.body.correo, req.body.perm,
                 sql = `UPDATE usuarios set nombre = ?, apellidos = ?, usuario_chat = ?, email = ?, permisos = ? WHERE id_usuario = ?;`;
     
-                update_user( pool, sql, [ String( req.body.nom ), String( req.body.ape ), String( req.body.usu_chat ), String( req.body.correo ),
-                    parseInt( req.body.perm ), parseInt( req.body.id ) ]).then( ( reponse ) => {
-                    res.json( req.body);
-                });
-            } else {
+                update_user( pool, sql, [ String( req.body.nom ), String( req.body.ape ), String( req.body.usu_chat ), String( req.body.correo ), parseInt( req.body.perm ), parseInt( req.body.id ) ])
+                .then( ( reponse ) => { res.json( req.body); });
+            }else{
                 // Con contra y sin vigencia
-                req.body.id, req.body.nom, req.body.ape, req.body.usu_chat, req.body.correo, req.body.validez, req.body.perm,
-    
+                // req.body.id, req.body.nom, req.body.ape, req.body.usu_chat, req.body.correo, req.body.validez, req.body.perm,
                 sql = `UPDATE usuarios set nombre = ?, apellidos = ?, usuario_chat = ?, email = ?, contrasenya = ?, permisos = ? WHERE id_usuario = ?;`;
-    
+
                 bcryp.hash( req.body.contra, 10, ( error, hash ) => {
-    
-                    update_user( pool, sql, [ String( req.body.nom ), String( req.body.ape ), String( req.body.usu_chat ), String( req.body.correo ),
-                        String( hash ), parseInt( req.body.perm ), parseInt( req.body.id ) ])
-                        .then( ( reponse ) => {
-                        res.json( req.body);
-                    });
+                    update_user( pool, sql, [ String( req.body.nom ), String( req.body.ape ), String( req.body.usu_chat ), String( req.body.correo ), String( hash ), parseInt( req.body.perm ), parseInt( req.body.id ) ])
+                    .then( ( reponse ) => { res.json( req.body); });
                 });
             };
-    
-        } else {
+        }else{
             // Con vigencia
             if( req.body.contra == "" || req.body.contra == undefined ){
                 // Sin contra y con vigencia
-                req.body.id, req.body.nom, req.body.ape, req.body.usu_chat, req.body.correo, req.body.validez, req.body.perm,
-    
+                // req.body.id, req.body.nom, req.body.ape, req.body.usu_chat, req.body.correo, req.body.validez, req.body.perm,
                 sql = `UPDATE usuarios set nombre = ?, apellidos = ?, usuario_chat = ?, email = ?, permisos = ?, vigencia = ? WHERE id_usuario = ?;`;
-    
-                update_user( pool, sql, [ String( req.body.nom ), String( req.body.ape ), String( req.body.usu_chat ), String( req.body.correo ),
-                    parseInt( req.body.perm ), req.body.validez, parseInt( req.body.id ) ]).then( ( reponse ) => {
-                    res.json( req.body);
-                });
-    
-            } else {
+
+                update_user( pool, sql, [ String( req.body.nom ), String( req.body.ape ), String( req.body.usu_chat ), String( req.body.correo ), parseInt( req.body.perm ), req.body.validez, parseInt( req.body.id ) ])
+                .then( ( reponse ) => { res.json( req.body); });
+            }else{
                 // Con contra y con vigencia
-                req.body.id, req.body.nom, req.body.ape, req.body.usu_chat, req.body.contra, req.body.correo, req.body.validez, req.body.perm,
+                // req.body.id, req.body.nom, req.body.ape, req.body.usu_chat, req.body.contra, req.body.correo, req.body.validez, req.body.perm,
     
                 bcryp.hash( req.body.contra, 10, ( error, hash ) => {
-    
                     sql = `UPDATE usuarios set nombre = ?, apellidos = ?, usuario_chat = ?, email = ?, contrasenya = ?, permisos = ?, vigencia = ? WHERE id_usuario = ?;`;
-        
-                    update_user( pool, sql, [ String( req.body.nom ), String( req.body.ape ), String( req.body.usu_chat ), String( req.body.correo ),
-                       String( hash ), parseInt( req.body.perm ), req.body.validez, parseInt( req.body.id ) ]).then( ( reponse ) => {
-                        res.json( req.body);
-                    });
+                    update_user( pool, sql, [ String( req.body.nom ), String( req.body.ape ), String( req.body.usu_chat ), String( req.body.correo ), String( hash ), parseInt( req.body.perm ), req.body.validez, parseInt( req.body.id ) ])
+                    .then( ( reponse ) => { res.json( req.body); });
                 });
             };
         };
-
-    }catch( error ){
-        console.log( error );
-        res.json( req.body);
-    }
-
+    }catch( error ){ console.log( error ); res.json( req.body); };
 });
 
 // GET DELETE_USER
@@ -362,38 +291,32 @@ router.post('/del_user', have_session, is_admin, ( req, res ) => {
     del_user(pool,req.body.user).then(
         res.json( req.body )
     )
-    .catch( error => {
-        console.log( error );
-        res.json( req.body );
+    .catch( error => { console.log( error ); res.json( req.body );
     });
-    
 });
-
 
 // -----------------------------
 // ------ FORAIGN MODULES ------
 // -----------------------------
-
-
+// GET DRAW CANVAS
 router.get('/draw_canvas', have_session, (req, res, next) => {
     res.render('templates/modules/draw-canvas/draw-canvas.ejs', { user_name: req.session.nombre,
         user_email: req.session.email,
         user_permision: req.session.permiso_name, });
 });
-
 // ----------------------------
 // --------- CHATTING ---------
 // ----------------------------
-
+// GET CHATTING
 router.get('/chatting', have_session, (req, res, next) => {
 res.render('templates/chatting.ejs', { user_name: req.session.nombre,
     user_email: req.session.email,
     user_permision: req.session.permiso_name, })
 });
-
 // -------------------------
 // --------- EMAIL ---------
 // -------------------------
+// GET EMAIL
 router.get('/email', have_session, (req, res, next) => {
 
     todos_los_usuarios( pool ).then( ( response ) => {
@@ -401,125 +324,85 @@ router.get('/email', have_session, (req, res, next) => {
             user_email: req.session.email,
             user_permision: req.session.permiso_name, usuarios: response});
     });
-    
 });
 
+// POST EMAIL
 router.post('/email', have_session, ( req, res, next) => {
-console.log( req.body );
-try{
-    console.log( req.body.writed );
-    console.log( req.body.email );
-    console.log( req.body.subject );
-    console.log( req.body.content );
+    // console.log( req.body );
+    try{
+        // console.log( req.body.writed );
+        // console.log( req.body.email );
+        // console.log( req.body.subject );
+        // console.log( req.body.content );
 
-    if(req.body.writed == ""){
-        email( receiver = req.body.email , subject = req.body.subject, content = req.body.content).then( ( response ) => {
-            console.log(' Succesfull email send by req.body.email');
-            res.redirect('/email');
-        });
-    }else{
-        email( receiver = req.body.email , subject = req.body.subject, content = req.body.content).then( ( response ) => {
-            console.log(' Succesfull email send by req.body.writed');
-            res.redirect('/email');
-        });
-    }
-
-}catch( error ){
-    console.log( error );
-    res.redirect('/email');
-};
-
-
+        if(req.body.writed == ""){
+            email( receiver = req.body.email , subject = req.body.subject, content = req.body.content).then( ( response ) => {
+                console.log(' Succesfull email send by req.body.email');
+                res.redirect('/email');
+            });
+        }else{
+            email( receiver = req.body.email , subject = req.body.subject, content = req.body.content).then( ( response ) => {
+                console.log(' Succesfull email send by req.body.writed');
+                res.redirect('/email');
+            });
+        };
+    }catch( error ){ console.log( error ); res.redirect('/email'); };
 });
 
 // -----------------------------
 // ------ SUBIR IMAGENES ------
 // -----------------------------
-
+// POST IMAGES
 router.post('/images', have_session, ( req, res, next) => {
     try{
         const folderPath = path.join(__dirname,`../../public/images/folder-${req.session.nombre}`);
-        // fs.mkdir(folderPath, { recursive: true }, (error) => {
-        //     if (error) {
-        //         console.error(error);
-        //         throw error;
-        //     } else {
-        //         console.log('Carpeta creada');
-                    
-        //         };
-        // });
 
+        // Existe la carpeta ?
         if (fs.existsSync( folderPath )){
             // la carpeta existe
             fs.rmdirSync( folderPath , { recursive: true } );
             //console.log('La carpeta ha sido borrada.');
             fs.mkdirSync( folderPath ,(erro) => {
-              if (erro) { throw erro;
-              }else{  console.log('Carpeta Creada') };
+              if (erro) {
+                throw erro;
+              }else{  console.log('Carpeta Creada'); };
             });
             
         } else {
             // la carpeta no existe
             fs.mkdirSync( folderPath ,(erro) => {
-              if (erro) { throw erro;
-              }else{
-                console.log('Carpeta Creada');
-              }
+              if (erro) {
+                throw erro;
+              }else{ console.log('Carpeta Creada'); };
             });
         };
+
         var nom_file;
-        // MULTER
+        // CONFIGURACIÓN MULTER
         const storage = multer.diskStorage({
             destination: (req, file, cb) => {
             cb(null, `${ folderPath }`) // Especifica la ubicación de guardado
             },
             filename: (req, file, cb) => {
-            cb( null, file.originalname )
+                cb( null, file.originalname );
             }
         });
+
         const upload = multer({ storage });
 
         // console.log( 'nombre-de sesion', req.session.nombre );
-
         upload.single('file')(req, res, function(err) {
-
             nom_file = req.file.originalname;
-            console.log( nom_file );
+            // console.log( nom_file );
 
             res.redirect(`/dashboard?param1=${nom_file}`);
 
-            if (err) {
-            console.error(err);
-            return res.status(500).send('Error al subir el archivo.');
-            }
+            if( err ){
+                console.error(err);
+                return res.status(500).send('Error al subir el archivo.');
+            };
         });
-    }catch( error ){
-        console.log( error );
-    };
+    }catch( error ){ console.log( error ); };
 });
-
-// -----------------------------
-// ------- OTHERS ROUTES -------
-// -----------------------------
-
-// GET ElemensDelay
-router.get('/ElemensDelay', (req, res, next) => {
-
-    const elementos = ['Elemento 1', 'Elemento 2', 'Elemento 3', 'Elemento 4'];
-    res.render('./utils/example', { elementos: elementos });
-    
-});
-
-// GET SlowTransition
-router.get('/SlowTransition',(req, res, next) => {
-    res.render('./utils/transition');
- });
-
- // GET LastPOsition
-
- router.get('/LastPosition',(req, res, next) => {
-    res.render('./utils/lastpos')
- });
-
 
 module.exports = router;
