@@ -32,15 +32,11 @@ Built-in
 
 - Express-mysql-session "^3.0.0"
 
-- Connect-flash "^0.1.1
-
 - Bcryptjs "^2.4.3",
 
 
 
 - Socket.io "^4.6.1"
-
-- Child_process "^1.0.2"
 
 - Multer: "^1.4.5-lts.1"
 
