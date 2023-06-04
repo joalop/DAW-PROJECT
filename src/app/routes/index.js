@@ -1,7 +1,9 @@
-const express = require('express')
-const router = express.Router()
-
+const express = require('express');
+const router = express.Router();
+const path = require('path');
+const multer = require('multer');
 const bcryp = require('bcrypt');
+const fs = require('fs');
 
 // Login coments
 let comments = "";
@@ -74,7 +76,7 @@ router.post('/login', (req, res, next) => {
                                     //
                                     req.session.permiso_name = permiso[0].nombre;  // 'USER', 'ADMINISTRATOR'
 
-                                    res.render( 'templates/dashboard.ejs', { user_name: req.session.nombre, user_email: req.session.email, user_permision: req.session.permiso_name, id_user: req.session.id_usuario } );
+                                    res.render( 'templates/dashboard.ejs', { user_name: req.session.nombre, user_email: req.session.email, user_permision: req.session.permiso_name, id_user: req.session.id_usuario, param1Value : "" } );
                                 });
                             });
 
@@ -183,13 +185,19 @@ router.post('/register', (req, res, next) => {
 // GET DASHBOARD
 router.get('/dashboard', have_session, (req, res, next) => {
     let comments = "";
+    let param1Value = "";
+    if(req.query.param1){
+        param1Value = req.query.param1;
+    }
+
+    
 
     res.render( 'templates/dashboard.ejs', {
         user_name: req.session.nombre,
         user_email: req.session.email,
         user_permision: req.session.permiso_name,
         id_user: req.session.id_usuario,
-        comments,
+        comments, param1Value
     });
 });
 
@@ -422,6 +430,72 @@ try{
 };
 
 
+});
+
+// -----------------------------
+// ------ SUBIR IMAGENES ------
+// -----------------------------
+
+router.post('/images', have_session, ( req, res, next) => {
+    try{
+        const folderPath = path.join(__dirname,`../../public/images/folder-${req.session.nombre}`);
+        // fs.mkdir(folderPath, { recursive: true }, (error) => {
+        //     if (error) {
+        //         console.error(error);
+        //         throw error;
+        //     } else {
+        //         console.log('Carpeta creada');
+                    
+        //         };
+        // });
+
+        if (fs.existsSync( folderPath )){
+            // la carpeta existe
+            fs.rmdirSync( folderPath , { recursive: true } );
+            //console.log('La carpeta ha sido borrada.');
+            fs.mkdirSync( folderPath ,(erro) => {
+              if (erro) { throw erro;
+              }else{  console.log('Carpeta Creada') };
+            });
+            
+        } else {
+            // la carpeta no existe
+            fs.mkdirSync( folderPath ,(erro) => {
+              if (erro) { throw erro;
+              }else{
+                console.log('Carpeta Creada');
+              }
+            });
+        };
+        var nom_file;
+        // MULTER
+        const storage = multer.diskStorage({
+            destination: (req, file, cb) => {
+            cb(null, `${ folderPath }`) // Especifica la ubicación de guardado
+            },
+            filename: (req, file, cb) => {
+            cb( null, file.originalname )
+            }
+        });
+        const upload = multer({ storage });
+
+        // console.log( 'nombre-de sesion', req.session.nombre );
+
+        upload.single('file')(req, res, function(err) {
+
+            nom_file = req.file.originalname;
+            console.log( nom_file );
+
+            res.redirect(`/dashboard?param1=${nom_file}`);
+
+            if (err) {
+            console.error(err);
+            return res.status(500).send('Error al subir el archivo.');
+            }
+        });
+    }catch( error ){
+        console.log( error );
+    };
 });
 
 // -----------------------------

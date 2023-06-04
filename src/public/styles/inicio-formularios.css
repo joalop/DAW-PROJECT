@@ -103,7 +103,7 @@ body main .seccion-centrada .reaccion {
 body main footer {
   position: absolute;
   bottom: 0;
-  left: 40%;
+  left: 38%;
   display: flex;
   flex-direction: row;
   justify-content: space-between;
@@ -185,7 +185,7 @@ body main footer .div ul li p.instagram {
   footer {
     flex-direction: column !important;
     z-index: 0 !important;
-    left: 25% !important;
+    left: 24.5% !important;
   }
   footer .div {
     flex-direction: column !important;

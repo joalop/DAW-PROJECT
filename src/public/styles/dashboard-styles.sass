@@ -30,3 +30,95 @@
             background: linear-gradient(5deg, rgba(244,254,255,1) 70%, rgba(83,83,200,1) 90%, rgba(9,9,121,1) 100%)
 
             opacity: 0.75
+
+.images-container
+    position: absolute
+    top: 25%
+    left: 41%
+
+    display: none
+    flex-direction: column
+    justify-content: center
+    align-items: center
+
+    width: 18rem
+    height: 10rem
+
+    padding: 10px
+
+    background: rgb(74, 80, 94)
+
+    box-shadow: 2px 2px 2px 1px black
+    border-radius: 10px
+
+    .image-close
+            margin-bottom: 2rem
+            transform: translateX(100px) scale(1.5)
+
+            color: #4c0a0a
+            font-size: 20px
+            cursor: pointer
+
+    form
+        display: flex
+        flex-direction: column
+        justify-content: center
+        align-items: center
+        
+        input.file
+            margin: 0.5rem
+
+            padding: 5px
+
+            background: rgb(210, 255, 249)
+
+            box-shadow: 2px 2px 2px 1px black
+            border-radius: 10px
+
+            text-align: center
+        button.images-button
+            margin: 0.5rem
+
+            padding: 5px
+
+            background: rgb(210, 255, 249)
+
+            box-shadow: 2px 2px 2px 1px black
+            border-radius: 10px
+
+            color: #000
+
+            text-align: center
+            font-weight: bold
+            cursor: pointer
+            transition: 0.8s
+            &:hover
+                background: #6d48ff
+                transform: translateX(10px) scale(1.5)
+
+#image-upload
+    display: flex
+    flex-direction: column
+    justify-content: center
+    align-items: center
+
+    position: absolute
+    bottom: 0
+    left: 41.5%
+    img
+        width: 20rem
+
+        padding: 5px
+        box-shadow: 1px 1px 1px 1px #000
+        border-radius: 10px
+
+@media only screen and (max-width: 1048px)
+    header
+        z-index: 10 !important
+    .images-container
+        left: 12% !important
+    #image-upload
+        left: 24.5%
+        z-index: 0 !important
+        img
+            width: 12rem !important

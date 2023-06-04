@@ -32,8 +32,8 @@
                 <i class="fa-solid fa-envelope"> </i>
             </div>
 
-            <div class="nota container">
-                <i class="fa-solid fa-plus"> </i>  <i class="fa-solid fa-note-sticky"> </i> <i class="fa-solid fa-square-minus"> </i> <i class="fa-solid fa-cloud"> </i> </i>
+            <div class="images container">
+                </i> <i class="fa-solid fa-cloud"> </i> </i>
             </div>
 
             <div class="chatting container">
@@ -47,8 +47,25 @@
             <div class="user-profile container" onclick=" editar_user( `<%- id_user %>` ) ">
                 <i class="fa-solid fa-address-card user-identifier"> </i>
             </div>
-
         </div>
+
+        <div class="images-container">
+            <i class="fa-solid fa-rectangle-xmark image-close"></i>
+            <form action="/images" method="post" class="images-form" enctype="multipart/form-data">
+                <input type="file" name="file" id="" class="file">
+                <input type="text" name="oculto" value=" <%= user_name %> " hidden>
+                <button class="images-button"> <i class="fa-solid fa-cloud"> </i> </button>
+            </form>
+        </div>
+
+        <% if( param1Value != ""){ %>
+            <div id="image-upload">
+                <img src="/images/folder-<%=user_name%>/<%-param1Value%>" alt="">
+            </div>
+
+        <% } %>
+
+
     </main>
 <script> console.log(`<%- id_user %>`); </script>
     <script>
@@ -113,6 +130,36 @@
             window.location.href = "http://localhost:3000/email";
         });
 
+        // IMAGES
+        
+
+        document.addEventListener('DOMContentLoaded', () => {
+            try {
+                let images = document.querySelector('.images');
+                let images_container = document.querySelector('.images-container');
+
+                images.addEventListener('click', () => {
+                    images_container.style.display = 'flex';
+                });
+
+                let image_close = document.querySelector('.image-close');
+                image_close.addEventListener('click', () => {
+                    images_container.style.display = 'none';
+                });
+
+                let imagesForm = document.querySelector('.images-form');
+                let button = document.querySelector('.images-button');
+            
+                button.addEventListener('click', (event) => {
+                    event.preventDefault();
+                    imagesForm.submit();
+                });
+
+            } catch (error) {
+              console.log(error);
+            }
+          });
+          
     </script>
 
 </body>
