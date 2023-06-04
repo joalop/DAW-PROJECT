@@ -2,6 +2,7 @@
   "name": "proyecto-daw",
   "version": "1.0.0",
   "scripts": {
+    "start": "node ./src/app/app.js",
     "test": "echo \"Error: no test specified\" && exit 1",
     "devstart": "nodemon ./src/app/app.js",
     "devserver": "nodemon ./src/app/app.js"
