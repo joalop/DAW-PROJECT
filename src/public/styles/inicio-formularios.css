@@ -101,9 +101,10 @@ body main .seccion-centrada .reaccion {
   font-weight: bold;
 }
 body main footer {
-  position: absolute;
   bottom: 0;
-  left: 38%;
+  width: 50%;
+  margin-left: 27%;
+  margin-top: 14rem;
   display: flex;
   flex-direction: row;
   justify-content: space-between;
@@ -182,10 +183,18 @@ body main footer .div ul li p.instagram {
 }
 
 @media only screen and (max-width: 1048px) {
+  header {
+    z-index: 10 !important;
+  }
+  header nav ul {
+    top: 50px !important;
+  }
   footer {
+    margin-top: 2rem;
     flex-direction: column !important;
     z-index: 0 !important;
-    left: 24.5% !important;
+    margin-left: 22.5% !important;
+    margin-top: 1.5rem !important;
   }
   footer .div {
     flex-direction: column !important;

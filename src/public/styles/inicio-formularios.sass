@@ -116,9 +116,12 @@ body
                 font-weight: bold
 
         footer
-            position: absolute
             bottom: 0
-            left: 38%
+            width: 50%
+            margin-left: 27%
+            margin-top: 14rem
+
+            
 
             display: flex
             flex-direction: row
@@ -204,10 +207,17 @@ body
                             border-radius: 10px
 
 @media only screen and (max-width: 1048px)
+    header
+        z-index: 10 !important
+        nav
+            ul
+                top: 50px !important
     footer
+        margin-top: 2rem
         flex-direction: column !important
         z-index: 0 !important
-        left: 24.5% !important
+        margin-left: 22.5% !important
+        margin-top: 1.5rem !important
         .div
             flex-direction: column !important
             justify-content: center !important
