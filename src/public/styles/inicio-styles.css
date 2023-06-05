@@ -111,6 +111,7 @@
     z-index: 10;
   }
   header ul {
+    top: 18px !important;
     margin-top: 2.3rem !important;
     line-height: 40px !important;
   }

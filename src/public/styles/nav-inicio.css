@@ -80,7 +80,6 @@ body main header nav ul li a i {
     margin: 0;
     background: linear-gradient(90deg, rgb(154, 255, 253) 11%, rgb(123, 192, 228) 34%, rgb(63, 13, 218) 100%);
     left: -100%;
-    top: 50px !important;
     text-align: center;
     transition: all 0.5s;
     opacity: 0.9;
